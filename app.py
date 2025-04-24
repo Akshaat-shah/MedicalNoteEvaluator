@@ -160,7 +160,7 @@ if st.session_state.analysis_complete:
                 prompt = ChatPromptTemplate.from_template(template)
                 llm = ChatOpenAI(model="gpt-4o", openai_api_key=openai_api_key, temperature=0)
                 
-                # Use the newer pattern (prompt | llm) instead of LLMChain
+                # Create the chain using the newer pipe operator pattern
                 chain = prompt | llm
                 
                 # Run the chain
@@ -196,7 +196,10 @@ if not html_file or not excel_file:
         ### How to use this app
         
         1. **Upload HTML File**: This should be the physician-generated note in HTML format
-        2. **Upload Excel File**: This should contain the feedback data with expected values
+        2. **Upload Excel File**: This should contain the feedback data with expected values in the format:
+           - Column 1: "Category" (e.g., "Checkbox", "PMHx", "ROS", "Exam", "A&P")
+           - Column 2: "Field" (e.g., field name or number)
+           - Column 3: "Expected Value" (the expected value for that field)
         3. **View Results**: The app will automatically analyze and display:
            - Extracted data from the HTML note
            - Comparison between note and feedback
