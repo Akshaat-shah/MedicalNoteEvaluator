@@ -4,7 +4,6 @@ import io
 from bs4 import BeautifulSoup
 from langchain.prompts import ChatPromptTemplate
 from langchain_community.chat_models import ChatOpenAI
-from langchain.chains import LLMChain
 import os
 from utils import (
     extract_data_from_html, 
@@ -112,9 +111,15 @@ if st.session_state.analysis_complete:
         }
         return colors.get(val, '')
     
-    # Convert results to dataframe and display
+    # Convert results to dataframe and make sure all data is string type to avoid Arrow errors
     results_df = pd.DataFrame(st.session_state.comparison_results)
-    st.dataframe(results_df.style.applymap(color_status, subset=['Status']), height=400)
+    
+    # Convert all data to strings to avoid mixed type errors
+    for col in results_df.columns:
+        results_df[col] = results_df[col].astype(str)
+    
+    # Use map instead of applymap (deprecated)
+    st.dataframe(results_df.style.map(color_status, subset=['Status']), height=400)
     
     # Generate LLM explanation
     if st.button("Generate AI Explanation of Discrepancies"):
@@ -154,14 +159,16 @@ if st.session_state.analysis_complete:
                 # do not change this unless explicitly requested by the user
                 prompt = ChatPromptTemplate.from_template(template)
                 llm = ChatOpenAI(model="gpt-4o", openai_api_key=openai_api_key, temperature=0)
-                chain = LLMChain(llm=llm, prompt=prompt)
+                
+                # Use the newer pattern (prompt | llm) instead of LLMChain
+                chain = prompt | llm
                 
                 # Run the chain
-                response = chain.run(
-                    mismatches=str(mismatches),
-                    missing=str(missing),
-                    extra=str(extra)
-                )
+                response = chain.invoke({
+                    "mismatches": str(mismatches),
+                    "missing": str(missing),
+                    "extra": str(extra)
+                }).content
                 
                 st.session_state.explanation = response
         

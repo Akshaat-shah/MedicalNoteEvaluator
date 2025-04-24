@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Physician’s Progress Note</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            content: ["./*.html"],
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            blue: {
+                                light: "#00ccdd"
+                            }
+                        }
+                    }
+                }
+            },
+            darkMode: "class"
+        };
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.1/tailwind.min.css" />
+    <style type="text/css">
+        @tailwind base;
+        @tailwind components;
+        @tailwind utilities;
+
+        body {
+            font-family: Inter;
+            font-size: 11pt;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .title {
+            font-family: Montserrat;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .section {
+            padding: 10px 0px;
+        }
+
+        .section-title {
+            font-family: Montserrat;
+            padding: 5px 0px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .assessment-and-plan {
+            font-family: monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+
+<body
+    class="dark flex flex-row justify-center bg-gray-50 border-gray-200 border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800 text-gray-300">
+    <div class="p-5 w-[800px] flex flex-col">
+        <div class="title text-center">Physician's Progress Note</div>
+
+        <div>
+            <span class="label">Patient Seen & Examined:</span> <input type="checkbox" checked> Yes <input
+                type="checkbox">
+            No
+            <span class="label">Relevant History Taken:</span> <input type="checkbox" checked> Yes <input
+                type="checkbox">
+            No
+        </div>
+
+        <div class="section">
+            <div class="section-title">Subjective</div>
+            <div><p>Patient is a 74 year old male with PMHx of opiate use disorder (on methadone), hepatitis C (treated), end stage renal disease on hemodialysis, atrial fibrillation, prior right hip replacement, hypertension, hyperlipidemia, and cerebrovascular accident in 2019 with mild intermittent left upper extremity weakness.</p></div>
+        </div>
+        <div class="section text-gray-500">
+            <pre class="pre text-wrap">
+Step 1: Check for Available Sources.
+            </pre>
+            <pre class="pre text-wrap">
+Primary physician for DOS 4/7/2025 is Anderson Boddie, MD (attending).
+            </pre>
+            <pre class="pre text-wrap">
+Available documents: Discharge summary by Olivers, Gideon, MD (attending, not primary for this encounter), H&amp;P by Olivers, Gideon, MD (not primary for this encounter). No progress note by primary or other physician within 1.5 months.
+            </pre>
+            <pre class="pre text-wrap">
+Step 2: Apply the Document-Specific Rule.
+            </pre>
+            <pre class="pre text-wrap">
+Discharge summary by another physician is the highest-precedence available document. Use Case C: Discharge Note Available (by another physician).
+            </pre>
+            <pre class="pre text-wrap">
+Extract PMHx from Discharge Diagnosis, Hospital Course, and Assessment/Plan sections of the discharge summary. List of PMHx: opiate use disorder (on methadone), hepatitis C (treated), ESRD on hemodialysis (since August 2024, right permacath, MWF), atrial fibrillation on anticoagulation, prior right hip replacement (6/2024), acute on chronic right hip pain, acute on chronic nondisplaced right inferior pubic ramus fracture, intermittent asymptomatic hypoglycemia, transaminitis (likely shock liver/rhabdomyolysis), hyperkalemia, increased falls, right plantar foot pain (neuropathy), hypertension, hyperlipidemia, NSTEMI (demand, in setting of ESRD), thrombocytopenia, CVA 2019 (mild intermittent left upper extremity weakness).
+            </pre>
+            <pre class="pre text-wrap">
+Age and gender from DOS: 74 year old male.
+            </pre>
+            <pre class="pre text-wrap">
+Step 3: Filter and Finalize. Remove acute/temporary problems and focus on chronic PMHx. Final PMHx: opiate use disorder (on methadone), hepatitis C (treated), ESRD on hemodialysis, atrial fibrillation, prior right hip replacement, hypertension, hyperlipidemia, CVA 2019 (mild intermittent left upper extremity weakness).
+            </pre>
+            <pre class="pre text-wrap">
+Using Case C: Discharge Note Available (by another physician).
+            </pre>
+        </div>
+
+        <div class="section">
+  <div class="section-title">Review of Systems:</div>
+  <div>
+    <input type="checkbox"> No Pain
+    <input type="checkbox" checked> Pain
+    <input type="checkbox" checked> No Cough
+    <input type="checkbox"> Cough
+    <input type="checkbox" checked> No Appetite Loss
+    <input type="checkbox" checked> No Constipation
+    <input type="checkbox" checked> No Diarrhea
+    <input type="checkbox"> Diarrhea <br />
+    <input type="checkbox"> Headache
+    <input type="checkbox" checked> SOB
+    <input type="checkbox"> Nausea
+    <input type="checkbox"> Vomiting
+    <input type="checkbox"> Abdominal Pain
+    <input type="checkbox"> Sore Throat
+  </div>
+  <div>
+    Weight changes reviewed: <input type="checkbox" checked> Yes <input type="checkbox"> No <br>
+    Any new behavior issues reviewed: <input type="checkbox" checked> Yes <input type="checkbox"> No <br>
+    Nurse’s notes reviewed: <input type="checkbox" checked> Yes <input type="checkbox"> No <br>
+    SS notes reviewed: <input type="checkbox" checked> Yes <input type="checkbox"> No <br>
+    IDT reviewed: <input type="checkbox" checked> Yes <input type="checkbox"> No
+  </div>
+</div>
+
+
+        <div class="section text-gray-500">
+            <pre class="white-space-pre text-wrap">
+Step 1: List of Document Founds
+- Discharge Summary (3/28/2025)
+- H&amp;P Note (3/25/2025)
+- Orders (latest revision 4/3/2025)
+- Medication List
+- Vitals Chart (not used for ROS extraction)
+
+Step 2: Found Symptoms, Diagnosis, Monitoring values from the documents
+- H&amp;P Note (Subjective): R hip pain, shortness of breath (SOB), no other complaints
+- Discharge Summary: R hip pain, right plantar foot pain (neuropathic), shortness of breath, no mention of cough, diarrhea, constipation, nausea, vomiting, sore throat, or headache
+- Orders: Monitor for pain every shift, non-pharmacological pain interventions, capsaicin for pain, lidocaine for pain, hydromorphone for pain, keep HOB elevated due to SOB, assess/observe for dyspnea, post-respiratory monitoring, incentive spirometer for pulmonary dysfunction
+
+Step 3: Explanation of each checkbox value
+- No Pain - Not checked, as pain is present and monitored
+- Pain - Checked, as pain is present (hip pain, foot pain) and monitored per Orders
+- No Cough - No mention of cough in any document, so checked
+- Cough - Not checked, as not mentioned
+- No Appetite Loss - No mention of appetite loss, so checked
+- No Constipation - No mention of constipation, so checked
+- No Diarrhea - No mention of diarrhea, so checked
+- Diarrhea - Not checked, as not mentioned
+- Headache - Not checked, as not mentioned
+- SOB - Checked, as shortness of breath is mentioned in H&amp;P and Discharge Summary, and Orders include interventions for SOB
+- Nausea - Not checked, as not mentioned
+- Vomiting - Not checked, as not mentioned
+- Abdominal Pain - Not checked, as not mentioned
+- Sore Throat - Not checked, as not mentioned
+
+- Weight changes reviewed: Yes (Orders include weight monitoring)
+- Any new behavior issues reviewed: Yes (Orders include psychiatric evaluation as indicated)
+- Nurse’s notes reviewed: Yes (implied by Orders and monitoring)
+- SS notes reviewed: Yes (implied by Orders and monitoring)
+- IDT reviewed: Yes (implied by Orders and monitoring)
+
+Precedence Rule applied: Subjective (H&amp;P) &gt; Assessment &amp; Plan (H&amp;P, Discharge) &gt; Orders &gt; Discharge Note. Pain and SOB are present and monitored, so those are checked. No evidence for other symptoms.
+            </pre>
+        </div>
+
+        <div class="section">
+    <div class="section-title">Exam</div>
+    <div>
+        <span class="label">Vitals:</span> BP: 130/79 mmHg | Pulse: 90 bpm | Temp: 97.6 °F | RR: 17 breaths/min<br> O2: 96 % | Weight: 171 Lbs | BS:  
+    </div>
+    <div>
+        HEENT: <input type="checkbox" checked> PERLA | <input type="checkbox"> Other <br>
+        Chest: <input type="checkbox"> CTAB | <input type="checkbox"> Wheezing | <input type="checkbox"> Rhonchi | <input type="checkbox" checked> Other (crackles at bases) <br>
+        CVS: <input type="checkbox" checked> S1 | <input type="checkbox" checked> S2 | <input type="checkbox" checked> Regular | <input type="checkbox"> Irregular | <input type="checkbox" checked> No Murmurs | <input type="checkbox"> Other <br>
+        Abdomen: <input type="checkbox" checked> Soft | <input type="checkbox" checked> Non-tender | <input type="checkbox"> Other <br>
+        Edema: <input type="checkbox"> Yes | <input type="checkbox" checked> No <br>
+        Neuro: Any Changes <input type="checkbox"> Yes | <input type="checkbox" checked> No <br>
+        Skin Issues: <br>
+        Other: 
+    </div>
+</div>
+
+        <div class="section text-gray-500">
+            <pre class="pre text-wrap">
+Step 1: List of document to refer from.
+- Vitals Chart (provided in last message)
+- Orders (provided as table)
+- Discharge Summary (contains physical exam)
+- H&amp;P (contains physical exam)
+
+Step 2: Vitals Document Content - And show the vitals extracted.
+- Vitals Chart:
+  BP: 130/79 mmHg | Pulse: 90 bpm | Resp: 17 breaths/min | Temp: 97.6 °F | O2: 96 % | Weight: 171 Lbs | BS:  | Pain: 0
+
+Step 3: Show extracted values for HEENT
+- No new HEENT complaints in Orders, Discharge Summary, or H&amp;P. Default remains: PERLA checked, Other unchecked.
+
+Step 4: Show extracted values for Chest - That might come from Physical exam, e.g. RESP: crackles at bases,...
+- H&amp;P: &quot;RESP: crackles at bases, no resp distress&quot;
+- Discharge Summary: &quot;Resp: Lungs clear to auscultation bilaterally&quot;
+- Orders: No mention of wheezing, rhonchi, or other abnormal lung sounds.
+
+Step 5: Special Handling of Chest
+- Since &quot;crackles at bases&quot; is mentioned in H&amp;P, per instructions, uncheck CTAB, check Other and label as &quot;Other (crackles at bases)&quot;. Wheezing and Rhonchi remain unchecked.
+
+Step 6: Show extracted values for CVS, Abdomen, Edema, Neuro, Skin Issues.
+- CVS: No new findings, defaults remain (S1, S2, Regular, No murmurs checked; Irregular, Other unchecked)
+- Abdomen: No new findings, defaults remain (Soft, Non-tender checked; Other unchecked)
+- Edema: No mention of swelling/edema, defaults remain (No checked, Yes unchecked)
+- Neuro: No new findings, defaults remain (No checked, Yes unchecked)
+- Skin Issues: No mention in Orders, Discharge Summary, or H&amp;P, leave blank.
+            </pre>
+        </div>
+
+        <div class="section">
+    <div class="section-title">Labs</div>
+    <div>
+        HgA1C:  | TSH:  | H/H:  | BUN/Cr:  <br>
+        Cholesterol:  | Other: SARS-CoV-2, RT-PCR (Cepheid) NEGATIVE<br>
+    </div>
+    <div><input type="checkbox" checked>No New Labs</div>
+</div>
+
+        <div class="section text-gray-500">
+            <pre class="pre text-wrap">
+Step 1: Review the provided documents for any dedicated lab or radiology reports within the allowed date range (1 month ±10 days from DOS 4/7/2025, and up to 7 days after DOS).
+            </pre>
+            <pre class="pre text-wrap">
+Step 2: The only dedicated lab report found is in the Discharge Summary (dated 3/28/2025) with labs from 3/27/2025. However, per instructions, labs in Discharge Summaries are NOT to be extracted as they are not considered dedicated lab reports.
+            </pre>
+            <pre class="pre text-wrap">
+Step 3: The COVID-19 RT-PCR report (reported 3/31/2025, collected 3/28/2025) is a dedicated lab report and falls within the allowed date range. The result is NEGATIVE.
+            </pre>
+            <pre class="pre text-wrap">
+Step 4: No other standalone lab or radiology reports are present in the provided documentation. All other lab values are only found in the Discharge Summary or narrative notes, which are not eligible for extraction.
+            </pre>
+            <pre class="pre text-wrap">
+Step 5: Therefore, all standard lab fields (HgA1C, TSH, H/H, BUN/Cr, Cholesterol) remain blank. The only value to report is the COVID-19 PCR under 'Other'.
+            </pre>
+            <pre class="pre text-wrap">
+Step 6: Since there are no new eligible labs or radiology reports, check the 'No New Labs' box.
+            </pre>
+        </div>
+
+
+        <div class="section">
+            <div class="section-title">Assessment & Plan</div>
+            <div class="py-2">
+                <div>Telephone & Medication Orders Reviewed: <input type="checkbox" checked> Yes <input type="checkbox">
+                    No
+                </div>
+                <div>Labs Reviewed: <input type="checkbox" checked> Yes <input type="checkbox"> No</div>
+                <div>If pt is on psych meds, benefits, risks and dose reduction reviewed: <input type="checkbox"
+                        checked>
+                    Yes <input type="checkbox"> No</div>
+
+            </div>
+            <div class="assessment-and-plan text-wrap"># Acute on chronic R hip pain, Prior R hip fx s/p repair (6/2024), Acute on chronic nondisplaced right inferior pubic ramus fracture
+- Lidocaine External Gel 4 %: Apply to Right hip topically one time a day for pain for 28 Days
+- HYDROmorphone HCl Oral Tablet 2 MG: Give 0.5 tablet by mouth every 4 hours as needed for moderate pain (4-6) to severe pain (7-10) for 28 Days
+- Capsaicin External Cream 0.1 %: Apply to Right plantar foot topically three times a day for pain for 30 Days
+
+# Right plantar foot pain
+- Gabapentin Oral Tablet 100 MG: Give 1 tablet by mouth three times a day for neuropathy
+
+# ESRD, HyperK
+- Sevelamer HCl Oral Tablet 800 MG: Give 3 tablet by mouth three times a day for END STAGE RENAL DISEASE take with meals
+- Calcium Acetate Oral Tablet 667 MG: Give 2 tablet by mouth with meals for ESRD
+- Calcium carbonate 260 mg calcium (648 mg): Give 2 tablet by mouth every night at bedtime for 2 doses
+
+# Opiate use disorder
+- Methadone HCl Oral Solution 10 MG/5ML: Give 145 mg by mouth one time a day for opioid dependence Supplied at HAART methadone clinic
+- Naloxone HCl Nasal Liquid 4 MG/0.1ML: 1 spray Alternating nostrils as needed for suspected overdose
+
+# AFib, NSTEMI
+- Apixaban Oral Tablet 5 MG: Give 1 tablet by mouth two times a day for clotting prevention
+
+# Hypertension
+- amLODIPine Besylate Oral Tablet 10 MG: Give 1 tablet by mouth one time a day for hypertension hold for SBP &lt;110 or HR &lt;60
+- Metoprolol Tartrate Oral Tablet 25 MG: Give 1 tablet by mouth two times a day for HTN Hold for SBP less than 110mmHg or HR less than 60
+
+# Constipation risk
+- Continue bowel regimen
+
+# FEN
+- Renal diet, Regular texture, Thin Liquids consistency
+- 500mL fluid restriction per day
+- Continuous I&amp;O Monitoring every shift due to fluid restriction of 1500ml
+- Cont. supplements
+
+# Deconditioning / Debility
+- PT 3x/week, 03-31-2025 – 04-27-2025
+- OT 5x/week, 03-29-2025 – 04-25-2025
+- ST 3x/week, 03-31-2025 – 04-27-2025</div>
+        </div>
+
+        <div class="section text-gray-500">
+            <pre class="pre text-wrap">
+Step 1: Documents found: Orders, Discharge Summary, Discharge Medication List, Progress Note (A&P), H&P, Medication List.
+            </pre>
+            <pre class="pre text-wrap">
+Step 2: Active medications from Orders with Start Date: 
+- Sevelamer HCl Oral Tablet 800 MG, 2025-04-03
+- Methadone HCl Oral Solution 10 MG/5ML, 2025-03-29
+- B Complex-C-Folic Acid Oral Tablet, 2025-03-28
+- Capsaicin External Cream 0.1 %, 2025-03-28
+- Gabapentin Oral Tablet 100 MG, 2025-03-28
+- HYDROmorphone HCl Oral Tablet 2 MG, 2025-03-28
+- Lidocaine External Gel 4 %, 2025-03-29
+- Metoprolol Tartrate Oral Tablet 25 MG, 2025-03-28
+- Naloxone HCl Nasal Liquid 4 MG/0.1ML, 2025-03-28
+- Senna Oral Tablet 8.6 MG, 2025-03-31
+- Apixaban Oral Tablet 5 MG, 2025-03-28
+- amLODIPine Besylate Oral Tablet 10 MG, 2025-03-29
+- Calcium Acetate Oral Tablet 667 MG, 2025-03-29
+- Calcium carbonate 260 mg calcium (648 mg), 2025-03-28
+- Docusate Sodium Capsule 100 MG, 2025-03-29
+- Dulcolax Suppository 10 MG, 2025-03-28
+- Fungoid Tincture External Solution 2 %, 2025-03-29
+- ST 3x/wk x4wks, 2025-03-31 to 2025-04-27
+- PT 3x/week for 4 weeks, 2025-03-31 to 2025-04-27
+- OT, 5 x/wk for 4 wks, 2025-03-29 to 2025-04-25
+            </pre>
+            <pre class="pre text-wrap">
+Step 3: Medications from Progress Note/Discharge Summary:
+# Acute on chronic R hip pain, # Prior R hip fx s/p repair (6/2024), # Acute on chronic nondisplaced right inferior pubic ramus fracture
+- Lidocaine patch and PRN Dilaudid for pain
+- PT/OT
+- PRN Dilaudid
+# Right plantar foot pain
+- started gabapentin 100 tid (renal dose)
+- trial capsaicin cream to bottom of foot only
+# ESRD (started HD August 2024. R permacath, MWF), # HyperK
+- Continue phoslo tid
+- added vitamin D supplement
+- continue ca carbonate 1,296 qhs for hypocalcemia
+- renal diet
+# Opiate use disorder
+- Restarted Methadone 145mg
+# AFib
+- eliquis 5mg bid
+# NSTEMI
+- eliquis 5mg bid
+# Increased falls
+- Pt/ot
+# Transaminitis
+- LFT improving
+- f/u hcv ma
+# Intermittent Asymptomatic Hypoglycemia
+- continue to trend and treat as needed
+            </pre>
+            <pre class="pre text-wrap">
+Step 4: FEN analysis:
+- Orders: Renal diet, fluid restriction, I&O monitoring, supplements (B complex, calcium, phoslo, etc.)
+- Per rules, only summarize as "Cont. supplements" under FEN unless a disease-specific diagnosis is present.
+- Nutrition: Renal diet, fluid restriction, I&O monitoring to be listed as documented.
+- Do not enumerate oral vitamins/minerals under FEN, use summary line.
+            </pre>
+            <pre class="pre text-wrap">
+Step 5: Deconditioning / Debility:
+- PT, OT, ST orders present with both start and end dates.
+- Format for Deconditioning / Debility:
+  PT 3x/week, 03-31-2025 – 04-27-2025
+  OT 5x/week, 03-29-2025 – 04-25-2025
+  ST 3x/week, 03-31-2025 – 04-27-2025
+- Correct format.
+            </pre>
+            <pre class="pre text-wrap">
+Step 6: Final List as per the rule:
+# Acute on chronic R hip pain, Prior R hip fx s/p repair (6/2024), Acute on chronic nondisplaced right inferior pubic ramus fracture
+- Lidocaine External Gel 4 %: Apply to Right hip topically one time a day for pain for 28 Days
+- HYDROmorphone HCl Oral Tablet 2 MG: Give 0.5 tablet by mouth every 4 hours as needed for moderate pain (4-6) to severe pain (7-10) for 28 Days
+- Capsaicin External Cream 0.1 %: Apply to Right plantar foot topically three times a day for pain for 30 Days
+
+# Right plantar foot pain
+- Gabapentin Oral Tablet 100 MG: Give 1 tablet by mouth three times a day for neuropathy
+
+# ESRD, HyperK
+- Sevelamer HCl Oral Tablet 800 MG: Give 3 tablet by mouth three times a day for END STAGE RENAL DISEASE take with meals
+- Calcium Acetate Oral Tablet 667 MG: Give 2 tablet by mouth with meals for ESRD
+- Calcium carbonate 260 mg calcium (648 mg): Give 2 tablet by mouth every night at bedtime for 2 doses
+
+# Opiate use disorder
+- Methadone HCl Oral Solution 10 MG/5ML: Give 145 mg by mouth one time a day for opioid dependence Supplied at HAART methadone clinic
+- Naloxone HCl Nasal Liquid 4 MG/0.1ML: 1 spray Alternating nostrils as needed for suspected overdose
+
+# AFib, NSTEMI
+- Apixaban Oral Tablet 5 MG: Give 1 tablet by mouth two times a day for clotting prevention
+
+# Hypertension
+- amLODIPine Besylate Oral Tablet 10 MG: Give 1 tablet by mouth one time a day for hypertension hold for SBP <110 or HR <60
+- Metoprolol Tartrate Oral Tablet 25 MG: Give 1 tablet by mouth two times a day for HTN Hold for SBP less than 110mmHg or HR less than 60
+
+# Constipation risk
+- Continue bowel regimen
+
+# FEN
+- Renal diet, Regular texture, Thin Liquids consistency
+- 500mL fluid restriction per day
+- Continuous I&O Monitoring every shift due to fluid restriction of 1500ml
+- Cont. supplements
+
+# Deconditioning / Debility
+- PT 3x/week, 03-31-2025 – 04-27-2025
+- OT 5x/week, 03-29-2025 – 04-25-2025
+- ST 3x/week, 03-31-2025 – 04-27-2025
+
+Step 7: Medications/therapy not in final list with reasons:
+- Docusate Sodium Capsule 100 MG: For constipation, not in A&P, not included per rules.
+- Dulcolax Suppository 10 MG: For constipation, not in A&P, not included per rules.
+- Fungoid Tincture External Solution 2 %: For fungal infection, not in A&P, not included per rules.
+- Senna Oral Tablet 8.6 MG: For constipation, not in A&P, not included per rules.
+- B Complex-C-Folic Acid Oral Tablet: Supplement, included under FEN as "Cont. supplements".
+- All other monitoring, non-medication, and consult orders: not included as per rules.
+
+1. If there are any medication under "Constipation Risk" please give reason for it: Only "Continue bowel regimen" is included, no specific medications listed per rules.
+2. If "# Pain Management" section is in final response, then why it is added: Not a separate section, pain meds are under specific diagnoses as per A&P.
+3. Explanation about "Wound management": No active wound diagnosis or wound care order, so not included.
+4. Explanation about "Debility": PT/OT/ST orders with dates present, so Deconditioning / Debility section included.
+5. Explanation about "FEN": Renal diet, fluid restriction, I&O monitoring, and supplements present, summarized as per rules.
+            </pre>
+        </div>
+
+        <div class="section">
+  <div>
+      <span class="label">Code Status:</span> 
+      <input type="checkbox"> POLST REVIEWED & SIGNED 
+      <input type="checkbox"> REFERRED FOR POLST COMPLETION
+  </div>
+  <div>
+      <span class="label">Pt. is high risk for:</span>
+      <input type="checkbox"> Falls
+      <input type="checkbox"> Wt. Changes
+      <input type="checkbox"> Behavior issues
+      <input type="checkbox"> ADL decline
+      <input type="checkbox"> DVT
+      <input type="checkbox"> Skin breakdown
+      <input type="checkbox"> Aspiration
+  </div>
+  <div>
+      <span class="label">Patient:</span>
+      <input type="checkbox"> Has the capacity to understand and make medical decisions
+      <input type="checkbox"> Needs assistance
+      <input type="checkbox"> Does not have the capacity
+  </div>
+  <div>
+      <input type="checkbox" checked> Discussed with Patient/Family/Nurse:
+      <input type="checkbox" checked> Goals of care
+      <input type="checkbox"> Discharge Planning
+      <input type="checkbox"> Change in tx
+      <input type="checkbox"> POLST
+  </div>
+  <div>
+      <input type="checkbox" checked> 50% of exam spent in counseling and/or coordination of care 
+      (Total time spent: 30 minutes)
+  </div>
+</div>
+
+        <div class="section text-gray-500">
+            <pre class="pre text-wrap">
+Step 1: Check for Progress Note or H&P document.
+            </pre>
+            <pre class="pre text-wrap">
+Found: INTERNAL MEDICINE H&P (History and Physical) document for Andres C Gooding, dated 3/25/2025.
+            </pre>
+            <pre class="pre text-wrap">
+Step 2: Search for a 'Code Status' section within the H&P or Progress Note.
+            </pre>
+            <pre class="pre text-wrap">
+Located 'Code Status' section in the Progress Note (page labeled 'Inpatient Checklist'):
+Code Status: Full Code: Full treatment confirmed with patient
+            </pre>
+            <pre class="pre text-wrap">
+This section does not contain any of the required checkboxes or fields from the approved list (POLST REVIEWED & SIGNED, REFERRED FOR POLST COMPLETION, Falls, Wt. Changes, etc.).
+            </pre>
+            <pre class="pre text-wrap">
+No other Code Status section with checkboxes or required fields found in the H&P or Progress Note.
+            </pre>
+            <pre class="pre text-wrap">
+No other Progress Note present. No Code Status section with checkboxes found in H&P.
+            </pre>
+            <pre class="pre text-wrap">
+Default values will be used as per instructions.
+            </pre>
+        </div>
+
+        <div class="footer flex flex-col">
+            <div class="flex flex-row py-2">
+                <div class="flex-1"><span class="label">Physician Signature:</span></div>
+                <div class="flex-1"><span class="label">Date:</span> 04/07/2025</div>
+            </div>
+            <div class="flex flex-row py-2">
+                <div class="flex-1"><span class="label">Patient Name:</span> Andres C Gooding</div>
+                <div class="flex-1"><span class="label">Attending Physician:</span>
+                    Anderson Boddie, MD</div>
+            </div>
+        </div>
+
+        <div class="section text-gray-500">
+        </div>
+    </div>
+</body>
+
+</html>
