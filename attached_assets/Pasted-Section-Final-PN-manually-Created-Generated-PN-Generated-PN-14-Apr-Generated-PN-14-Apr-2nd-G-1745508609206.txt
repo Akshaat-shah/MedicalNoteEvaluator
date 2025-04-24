@@ -1,0 +1,212 @@
+Section	Final PN (manually Created)	Generated PN	Generated PN - 14-Apr	Generated PN - 14-Apr - 2nd	Generated PN - 3rd	Generated PN - 15-Apr	Genrated PN - 16-Apr	Generated PN - 17-Apr	Generated PN - 19-Apr	Generated PN - 21-Apr	Generated PN - 22-Apr	Generated PN - 22-Apr - Final	Generated PN - 23-Apr	Comments (Self)	Comments 	Status
+Patient Seen & Examined	Yes	Yes	Yes	Yes	Yes	Yes	Yes	Yes	Yes	Yes	Yes	Yes	Yes			Correct
+Relevant History Taken	Yes	Yes	Yes	Yes	Yes	Yes	Yes	Yes	Yes	Yes	Yes	Yes	Yes			Correct
+Subjective	"Patient is a 72 year old female with PMHx of hypothyroidism, early cognitive decline, and migraines. Previous SNF resident for severe sepsis, encephalopathy, urinary retention, and AKI. Patient returns s/p GLF w/R displaced femur fx s/p IM nail (3/18/25). 
+
+Denies complaints"	Patient is a 72 year old male with PMHx of hypothyroidism, early cognitive decline, and migraines. Previous SNF resident for severe sepsis, encephalopathy, urinary retention, and AKI. Patient returns s/p GLF w/R displaced femur fx s/p IM nail (3/18/25).	Patient is a 72 year old male with PMHx of hypothyroidism, early cognitive decline, migraines, encephalopathy, myopathy, other lack of coordination, acute kidney failure, unspecified protein-calorie malnutrition, severe sepsis without septic shock, muscle weakness, generalized migraine, insomnia, retention of urine, depression, onycholysis, cognitive communication deficit, and unspecified abnormalities of gait and mobility. Patient returns s/p ground level fall with right displaced femur fracture s/p intramedullary nail on 3/18/25. Denies complaints.	Patient is a 72 year old male with PMHx of hypothyroidism, early cognitive decline, and migraines. Previous SNF resident for severe sepsis, encephalopathy, urinary retention, and AKI. Patient returns s/p GLF w/R displaced femur fx s/p IM nail (3/18/25). Denies complaints.	"Patient is a 72 year old male with PMHx of hypothyroidism, early cognitive decline, and migraines. Previous SNF resident for severe sepsis, encephalopathy, urinary retention, and AKI. Patient returns s/p GLF w/R displaced femur fx s/p IM nail (3/18/25).
+
+Denies complaints."	"Patient is a 72 year old male with PMHx of hypothyroidism, early cognitive decline, and migraines. Previous SNF resident for severe sepsis, encephalopathy, urinary retention, and AKI. Patient returns s/p GLF w/R displaced femur fx s/p IM nail (3/18/25).
+
+Denies complaints."	"Patient is a 72 year old female with PMHx of hypothyroidism, early cognitive decline, and migraines. Previous SNF resident for severe sepsis, encephalopathy, urinary retention, and AKI. Patient returns s/p GLF w/R displaced femur fx s/p IM nail (3/18/25).
+
+Denies complaints."	"Patient is a 72 year old female with PMHx of hypothyroidism, early cognitive decline, and migraines. Previous SNF resident for severe sepsis, encephalopathy, urinary retention, and AKI. Patient returns s/p GLF w/R displaced femur fx s/p IM nail (3/18/25).
+
+Denies complaints."	"Patient is a 72 year old female with PMHx of hypothyroidism, early cognitive decline, and migraines. Previous SNF resident for severe sepsis, encephalopathy, urinary retention, and AKI. Patient returns s/p GLF w/R displaced femur fx s/p IM nail (3/18/25).
+
+Denies complaints."	"Patient is a 72 year old female with PMHx of hypothyroidism, early cognitive decline, and migraines. Previous SNF resident for severe sepsis, encephalopathy, urinary retention, and AKI. Patient returns s/p GLF w/R displaced femur fx s/p IM nail (3/18/25).
+
+Denies complaints."	Patient is a 72 year old female with PMHx of hypothyroidism, early cognitive decline, and migraines. Previous SNF resident for severe sepsis, encephalopathy, urinary retention, and AKI. Patient returns s/p GLF w/R displaced femur fx s/p IM nail (3/18/25). Denies complaints.	"Patient is a 72 year old male with PMHx of hypothyroidism, early cognitive decline, and migraines. Previous SNF resident for severe sepsis, encephalopathy, urinary retention, and AKI. Patient returns s/p GLF w/R displaced femur fx s/p IM nail (3/18/25).
+
+Denies complaints."	"Patient is a 72 year old female with PMHx of hypothyroidism, early cognitive decline, and migraines. Previous SNF resident for severe sepsis, encephalopathy, urinary retention, and AKI. Patient returns s/p GLF w/R displaced femur fx s/p IM nail (3/18/25).
+
+Denies complaints."	"Denies complains is missing
+
+[14-Apr]: Content is copied from HPI and PMH section of H&P note, also formatting is not in place. Denies complaint is in second paragraph. 
+
+[14-Apr - 2nd]: Denies complaint need to be on second paragraph"	Denies complaint is in same line - Low	Correct
+Review of Systems	"No Pain - Yes
+No Cough - Yes
+No Apetite Loss - Yes
+No Constipation - Yes
+No Diarrhea - Yes
+Headache - Not selected
+SOB - Not selected
+Nausea - Not selected
+Vomiting - Not selected
+Abdominal Pain - Not selected
+Diarrhea - Not selected
+Pain - Not selected
+Cough - Not selected
+Sore Throat - Not selected"	"No Pain - Yes
+No Cough - Yes
+No Apetite Loss - Yes
+No Constipation - Yes
+No Diarrhea - Yes
+Headache - Not selected
+SOB - Yes
+Nausea - Not selected
+Vomiting - Not selected
+Abdominal Pain - Not selected
+Diarrhea - Not selected
+Pain - Not selected
+Cough - Not selected
+Sore Throat - Not selected"	"No Pain - Yes
+No Cough - Yes
+No Apetite Loss - Yes
+No Constipation - Yes
+No Diarrhea - Yes
+Headache - Not selected
+SOB - Yes
+Nausea - Not selected
+Vomiting - Not selected
+Abdominal Pain - Not selected
+Diarrhea - Not selected
+Pain - Not selected
+Cough - Not selected
+Sore Throat - Not selected"	"No Pain - Yes
+No Cough - Yes
+No Apetite Loss - Yes
+No Constipation - Yes
+No Diarrhea - Yes
+Headache - Not selected
+SOB - Yes
+Nausea - Not selected
+Vomiting - Not selected
+Abdominal Pain - Not selected
+Diarrhea - Not selected
+Pain - Not selected
+Cough - Not selected
+Sore Throat - Not selected"	"No Pain - Yes
+No Cough - Yes
+No Apetite Loss - Yes
+No Constipation - Yes
+No Diarrhea - Yes
+Headache - Not selected
+SOB - Yes
+Nausea - Not selected
+Vomiting - Not selected
+Abdominal Pain - Not selected
+Diarrhea - Not selected
+Pain - Not selected
+Cough - Not selected
+Sore Throat - Not selected"	"No Pain - Yes
+No Cough - Yes
+No Apetite Loss - Yes
+No Constipation - Yes
+No Diarrhea - Yes
+Headache - Not selected
+SOB - Not Selected
+Nausea - Not selected
+Vomiting - Not selected
+Abdominal Pain - Not selected
+Diarrhea - Not selected
+Pain - Not selected
+Cough - Not selected
+Sore Throat - Not selected"	"No Pain - Yes
+No Cough - Yes
+No Apetite Loss - Yes
+No Constipation - Yes
+No Diarrhea - Yes
+Headache - Not selected
+SOB - Selected
+Nausea - Not selected
+Vomiting - Not selected
+Abdominal Pain - Not selected
+Diarrhea - Not selected
+Pain - Not selected
+Cough - Not selected
+Sore Throat - Not selected"	"No Pain - Yes
+No Cough - Yes
+No Apetite Loss - Yes
+No Constipation - Yes
+No Diarrhea - Yes
+Headache - Not selected
+SOB - Selected
+Nausea - Not selected
+Vomiting - Not selected
+Abdominal Pain - Not selected
+Diarrhea - Not selected
+Pain - Not selected
+Cough - Not selected
+Sore Throat - Not selected"	"No Pain - Yes
+No Cough - Yes
+No Apetite Loss - Yes
+No Constipation - Yes
+No Diarrhea - Yes
+Headache - Not selected
+SOB - Not Selected
+Nausea - Not selected
+Vomiting - Not selected
+Abdominal Pain - Not selected
+Diarrhea - Not selected
+Pain - Not selected
+Cough - Not selected
+Sore Throat - Not selected"	"No Pain - Yes
+No Cough - Yes
+No Apetite Loss - Yes
+No Constipation - Yes
+No Diarrhea - Yes
+Headache - Not selected
+SOB - Not Selected
+Nausea - Not selected
+Vomiting - Not selected
+Abdominal Pain - Not selected
+Diarrhea - Not selected
+Pain - Not selected
+Cough - Not selected
+Sore Throat - Not selected"	"No Pain - Not selected
+No Cough - Yes
+No Apetite Loss - Yes
+No Constipation - Yes
+No Diarrhea - Yes
+Headache - Not selected
+SOB - Yes
+Nausea - Not selected
+Vomiting - Not selected
+Abdominal Pain - Not selected
+Diarrhea - Not selected
+Pain - Yes
+Cough - Not selected
+Sore Throat - Not selected"	"No Pain - Not selected
+No Cough - Yes
+No Apetite Loss - Yes
+No Constipation - Yes
+No Diarrhea - Yes
+Headache - Not selected
+SOB - Yes
+Nausea - Not selected
+Vomiting - Not selected
+Abdominal Pain - Not selected
+Diarrhea - Not selected
+Pain - Yes
+Cough - Not selected
+Sore Throat - Not selected"	"No Pain - Not selected
+No Cough - Yes
+No Apetite Loss - Yes
+No Constipation - Yes
+No Diarrhea - Yes
+Headache - Not selected
+SOB - Yes
+Nausea - Not selected
+Vomiting - Not selected
+Abdominal Pain - Not selected
+Diarrhea - Not selected
+Pain - Yes
+Cough - Not selected
+Sore Throat - Not selected"	"[11-Apr]: After copying from Previous Note, update based on Subjective and Assessment & PLan section
+
+[Cust]: Copied from H&P of primary physician, after that values are updated based on content in Subjective section and assessment & plan section. This is as per the rules provided"	"[15-Apr]: 
+Formatting :
+Pain, Cough and Sore Throat should be inline with Diarrhea - Medium
+
+SOB is not checked, cross check with Assessment & Plan section - High
+
+[16-Apr]: SOB is checked now. 
+Formating issue is still there
+
+[19-Apr]
+SOB should be checked
+
+[21-Apr]: SOB should be selected. In case previous note does not have this checked but it is present in A&P or Subjective section it has to be marked
+
+[22-Apr]: All correct"	Correct

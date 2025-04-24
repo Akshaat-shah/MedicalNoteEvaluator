@@ -150,31 +150,36 @@ if st.session_state.html_content and st.session_state.feedback_data is not None:
                 {feedback_data}
 
                 Instructions:
-                1. Identify the sections in the HTML note (like HPI, PMH, Exam, etc.)
-                2. For each section, compare the content with the corresponding section in the feedback data
-                3. Calculate an accuracy percentage score for each section
-                4. Calculate an overall accuracy percentage score for the entire note
-                5. Provide detailed explanations of what information was correct, incorrect, or missing in each section
-
-                Focus on the factual accuracy of the medical information, including:
-                - Whether correct conditions/diagnoses are documented
-                - Whether all important symptoms/findings are included
-                - Whether all required sections are properly populated
-                - Whether any information is incorrectly reported
+                1. Focus ONLY on these 6 specific sections: Subjective, Review Of Systems, Vitals, Labs, Assessment & Plan, Code Status
+                2. For each of these sections, calculate accuracy based on the "Comments" column and "Status" column in the feedback data
+                3. If the Status is "Correct", assign 100% accuracy
+                4. If the Status has issues mentioned in Comments, assign a lower accuracy score based on severity:
+                   - Low severity issues: 80-90%
+                   - Medium severity issues: 60-80%
+                   - High severity issues: <60%
+                   - If Status is "Incorrect": Maximum 50%
+                5. Calculate an overall accuracy score as the average of these 6 sections (only count sections that exist)
+                6. For each section, analyze what was correct and what needs improvement based on the comments
 
                 Respond with a JSON object with the following structure:
                 {{
                   "overall_accuracy_score": number,  // The overall accuracy percentage (0-100)
                   "section_scores": {{
-                    "section_name1": number,  // Section accuracy percentage
-                    "section_name2": number,
-                    // ... other sections
+                    "Subjective": number,  // Section accuracy percentage (0-100)
+                    "Review Of Systems": number,
+                    "Vitals": number,
+                    "Labs": number,
+                    "Assessment & Plan": number,
+                    "Code Status": number
                   }},
                   "explanation": string,     // Detailed explanation of the overall evaluation
                   "section_analyses": {{
-                    "section_name1": string,  // Analysis for this section
-                    "section_name2": string,
-                    // ... other sections
+                    "Subjective": string,  // Analysis for this section based on comments
+                    "Review Of Systems": string,
+                    "Vitals": string,
+                    "Labs": string,
+                    "Assessment & Plan": string,
+                    "Code Status": string
                   }},
                   "strengths": [string],     // List of strengths in the note
                   "weaknesses": [string],    // List of weaknesses in the note
@@ -182,7 +187,8 @@ if st.session_state.html_content and st.session_state.feedback_data is not None:
                 }}
                 
                 Ensure the accuracy scores are numbers between 0 and 100 representing percentage accuracy.
-                Be thorough in your analysis, focusing on the medical content's accuracy.
+                If a section is missing from the feedback data or HTML, mark it as "not evaluated" in the analysis 
+                and don't include it in the overall score calculation.
                 """
                 
                 # the newest OpenAI model is "gpt-4o" which was released May 13, 2024.
@@ -276,6 +282,9 @@ if st.session_state.accuracy_scores and st.session_state.explanation:
         for section, score in st.session_state.accuracy_scores["sections"].items():
             section_report += f"- {section}: {score}%\n"
         
+        # Get section analyses from explanation
+        section_analyses = st.session_state.explanation.get("section_analyses", {})
+        
         section_report += "\n## Section-by-Section Analysis\n"
         for section, analysis in section_analyses.items():
             section_report += f"### {section}\n{analysis}\n\n"
@@ -318,10 +327,16 @@ if not html_file or not excel_file:
         1. **Upload HTML File**: This should be the physician-generated note in HTML format
         2. **Upload Excel File**: This should contain the expert feedback data for the note
            - If your Excel file has multiple sheets, you can select which one to use
-           - The Excel should have columns for Section, Final PN (correct value), Generated PN (actual value), etc.
+           - The Excel should have columns for Section, Status (correct/incorrect), and Comments
         3. **Click "Evaluate Note Accuracy"**: The app will use AI to analyze the content and provide:
-           - An overall accuracy percentage score
-           - Section-by-section accuracy scores
+           - An overall accuracy percentage score based on 6 key sections:
+             * Subjective
+             * Review Of Systems
+             * Vitals
+             * Labs
+             * Assessment & Plan
+             * Code Status
+           - Section-by-section accuracy scores based on the Comments and Status columns
            - Detailed analysis of what was correct/incorrect in each section
            - Strengths and weaknesses of the note
            - Improvement suggestions
