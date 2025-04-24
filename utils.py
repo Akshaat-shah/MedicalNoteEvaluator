@@ -12,154 +12,124 @@ def extract_data_from_html(soup):
     Returns:
         Dictionary with extracted data categories
     """
-    data = {
-        'Checkboxes': {},
-        'PMHx': [],
-        'ROS': {},
-        'Exam': {},
-        'Assessment_Plan': [],
-        'Labs': {}
-    }
+    # Initialize data structure for all possible sections
+    data = {}
     
-    # Extract checkboxes (assume they have input type='checkbox')
-    checkboxes = soup.find_all('input', type='checkbox')
-    for checkbox in checkboxes:
-        # Try to find label text by looking at previous and next text nodes
-        if checkbox.parent and checkbox.parent.get_text():
-            label_text = checkbox.parent.get_text().strip()
-            # Extract just the label part (remove Yes/No if present)
-            if ":" in label_text:
-                label_parts = label_text.split(":")
-                label = label_parts[0].strip()
-            else:
-                # Just use the full text as a fallback
-                label = label_text.strip()
-                
-            # Clean up the label if needed
-            label = label.replace("Yes", "").replace("No", "").strip()
+    # Find all section divs with class 'section'
+    sections = soup.find_all('div', class_='section')
+    
+    # Process each section
+    for section in sections:
+        # Find the section title
+        section_title_div = section.find('div', class_='section-title')
+        if not section_title_div:
+            continue
             
-            # If label is empty, try to use adjacent text
-            if not label:
-                # Try using text before checkbox
-                prev_sibling = checkbox.previous_sibling
-                if prev_sibling and prev_sibling.string:
-                    label = prev_sibling.string.strip()
-                # If still empty, use next sibling text
-                if not label:
-                    next_sibling = checkbox.next_sibling
-                    if next_sibling and next_sibling.string:
-                        label = next_sibling.string.strip()
+        section_title = section_title_div.get_text().strip()
+        section_content_div = section_title_div.find_next_sibling('div')
+        
+        if not section_content_div:
+            continue
             
-            # Check if we're dealing with a Yes/No pair
-            if label in ["Yes", "No"]:
-                # Find the previous label
-                if checkbox.parent and checkbox.parent.previous_sibling:
-                    prev_elem = checkbox.parent.previous_sibling
-                    if prev_elem.string:
-                        label = prev_elem.string.strip()
-        else:
-            # Fallback if no parent text found
-            label = checkbox.get('name', checkbox.get('id', 'Unknown'))
+        section_content = section_content_div.get_text().strip()
         
-        # Get checkbox state
-        checked = checkbox.get('checked') is not None
+        # Store section content in our data dictionary
+        data[section_title] = section_content
         
-        # Add to data
-        data['Checkboxes'][label] = checked
+    # Extract "Patient Seen & Examined" and "Relevant History Taken" checkboxes
+    first_section = soup.find('div', class_=None)
+    if first_section:
+        checkbox_text = first_section.get_text().strip()
+        
+        # Check for "Patient Seen & Examined"
+        if "Patient Seen & Examined" in checkbox_text:
+            data["Patient Seen & Examined"] = "Checked" if first_section.find('input', {'type': 'checkbox', 'checked': True}) else "Unchecked"
+            
+        # Check for "Relevant History Taken"
+        if "Relevant History Taken" in checkbox_text:
+            data["Relevant History Taken"] = "Checked" if first_section.find_all('input', {'type': 'checkbox', 'checked': True}) else "Unchecked"
     
-    # Find and extract subjective section containing PMHx
-    subjective_section = soup.find(string=lambda text: text and "Subjective" in text)
-    if subjective_section:
-        section_div = subjective_section.find_parent("div")
-        if section_div:
-            # Find the paragraph containing PMHx info
-            pmhx_paragraph = section_div.find("p")
-            if pmhx_paragraph:
-                pmhx_text = pmhx_paragraph.get_text().strip()
-                if "PMHx" in pmhx_text:
-                    # Extract PMHx items from the text
-                    # Split by commas and identify medical conditions
-                    pmhx_items = [item.strip() for item in pmhx_text.split(",")]
-                    data['PMHx'] = pmhx_items
-                else:
-                    # Just add the whole paragraph as a single item
-                    data['PMHx'] = [pmhx_text]
-    
-    # Extract Review of Systems (ROS) from the ROS section
-    ros_section = soup.find(string=lambda text: text and "Review of Systems" in text)
+    # Process Review of Systems section separately due to its checkbox structure
+    ros_section = soup.find('div', class_='section-title', string='Review of Systems:')
     if ros_section:
-        section_div = ros_section.find_parent("div")
-        if section_div:
-            # Find all checkbox elements in the ROS section
-            ros_checkboxes = section_div.find_all("input", type="checkbox")
-            for checkbox in ros_checkboxes:
+        ros_content = ros_section.find_parent('div', class_='section')
+        if ros_content:
+            # Process all checkboxes in ROS section
+            ros_data = {}
+            
+            # Get all checkboxes and their labels
+            checkboxes = ros_content.find_all('input', type='checkbox')
+            for checkbox in checkboxes:
+                # Try to get the label by looking at the next sibling
+                label = None
                 next_sibling = checkbox.next_sibling
                 if next_sibling and next_sibling.string:
-                    symptom = next_sibling.string.strip()
-                    checked = checkbox.get('checked') is not None
-                    data['ROS'][symptom] = checked
-    
-    # Extract Exam findings
-    exam_section = soup.find(string=lambda text: text and "Exam" in text)
-    if exam_section:
-        section_div = exam_section.find_parent("div")
-        if section_div:
-            # Extract vitals
-            vitals_text = section_div.find(string=lambda text: text and "Vitals:" in text)
-            if vitals_text:
-                vitals_line = vitals_text.find_parent().get_text().strip()
-                data['Exam']['Vitals'] = vitals_line
-            
-            # Extract other exam findings by category
-            categories = ["HEENT", "Chest", "CVS", "Abdomen", "Edema", "Neuro", "Skin Issues"]
-            for category in categories:
-                category_line = section_div.find(string=lambda text: text and category in text)
-                if category_line:
-                    parent_elem = category_line.find_parent()
-                    checkboxes = parent_elem.find_all("input", type="checkbox")
-                    findings = []
-                    for checkbox in checkboxes:
-                        if checkbox.get('checked') is not None:
-                            next_sibling = checkbox.next_sibling
-                            if next_sibling and next_sibling.string:
-                                findings.append(next_sibling.string.strip())
-                    
-                    data['Exam'][category] = ", ".join(findings) if findings else "None documented"
-    
-    # Extract Labs
-    labs_section = soup.find(string=lambda text: text and "Labs" in text)
-    if labs_section:
-        section_div = labs_section.find_parent("div")
-        if section_div:
-            lab_lines = section_div.find_all("div")
-            for line in lab_lines:
-                text = line.get_text().strip()
-                # Check for lab values
-                if ":" in text:
-                    lab_pairs = text.split("|")
-                    for pair in lab_pairs:
-                        if ":" in pair:
-                            lab_name, lab_value = pair.split(":", 1)
-                            lab_name = lab_name.strip()
-                            lab_value = lab_value.strip()
-                            if lab_value:  # Only add if there's a value
-                                data['Labs'][lab_name] = lab_value
+                    label = next_sibling.string.strip()
                 
-                # Check for No New Labs checkbox
-                no_labs_checkbox = line.find("input", type="checkbox", checked=True)
-                if no_labs_checkbox and "No New Labs" in text:
-                    data['Labs']['No New Labs'] = True
+                # If no label found, use parent text
+                if not label and checkbox.parent:
+                    parent_text = checkbox.parent.get_text().strip()
+                    # Extract the label part (remove extra whitespace)
+                    label = parent_text.replace('Yes', '').replace('No', '').strip()
+                
+                # Set the status based on checked attribute
+                checked = checkbox.get('checked') is not None
+                
+                if label:
+                    ros_data[label] = "Checked" if checked else "Unchecked"
+            
+            data['ROS'] = ros_data
     
-    # Extract Assessment and Plan (may be at the end of the document)
-    assessment_section = soup.find(string=lambda text: text and "Assessment" in text)
-    if assessment_section:
-        section_div = assessment_section.find_parent("div")
-        if section_div:
-            plan_items = section_div.find_all(["p", "li", "pre"])
-            for item in plan_items:
-                text = item.get_text().strip()
-                if text and not text.startswith("Assessment"):  # Skip the heading
-                    data['Assessment_Plan'].append(text)
+    # Process Exam section separately due to its checkbox structure
+    exam_section = soup.find('div', class_='section-title', string='Exam')
+    if exam_section:
+        exam_content = exam_section.find_parent('div', class_='section')
+        if exam_content:
+            exam_data = {}
+            
+            # Extract vitals
+            vitals_span = exam_content.find('span', string=lambda s: s and 'Vitals:' in s)
+            if vitals_span:
+                vitals_text = vitals_span.find_parent().get_text().strip()
+                exam_data['Vitals'] = vitals_text
+            
+            # Process exam sections
+            for category in ["HEENT", "Chest", "CVS", "Abdomen", "Edema", "Neuro", "Skin Issues"]:
+                category_text = exam_content.find(string=lambda s: s and category in s)
+                if category_text:
+                    line = category_text.find_parent()
+                    
+                    # Find all checked checkboxes in this section
+                    checked_items = []
+                    checkboxes = line.find_all('input', type='checkbox', checked=True)
+                    
+                    for checkbox in checkboxes:
+                        next_sibling = checkbox.next_sibling
+                        if next_sibling and next_sibling.string:
+                            checked_items.append(next_sibling.string.strip())
+                    
+                    exam_data[category] = ", ".join(checked_items) if checked_items else "None"
+            
+            data['Exam'] = exam_data
+            
+    # If any critical sections are missing, look for them using alternative approaches
+    if 'HPI' not in data:
+        hpi_section = soup.find(string=lambda s: s and 'HPI' in s)
+        if hpi_section:
+            hpi_div = hpi_section.find_parent('div')
+            if hpi_div and 'section-title' in hpi_div.get('class', []):
+                hpi_content = hpi_div.find_next_sibling('div')
+                if hpi_content:
+                    data['HPI'] = hpi_content.get_text().strip()
+    
+    if 'PMH' not in data:
+        pmh_section = soup.find(string=lambda s: s and 'PMH' in s)
+        if pmh_section:
+            pmh_div = pmh_section.find_parent('div')
+            if pmh_div and 'section-title' in pmh_div.get('class', []):
+                pmh_content = pmh_div.find_next_sibling('div')
+                if pmh_content:
+                    data['PMH'] = pmh_content.get_text().strip()
     
     return data
 
@@ -179,42 +149,44 @@ def compare_data_to_feedback(html_data, feedback_df):
     # Create a flat representation of the HTML data for comparison
     flat_html_data = {}
     
-    # Process checkboxes
-    for key, value in html_data['Checkboxes'].items():
-        flat_html_data[f"Checkbox: {key}"] = str(value)
-    
-    # Process PMHx
-    for i, item in enumerate(html_data['PMHx']):
-        flat_html_data[f"PMHx: {i+1}"] = item
-    
-    # Process ROS
-    for system, findings in html_data['ROS'].items():
-        flat_html_data[f"ROS: {system}"] = findings
-    
-    # Process Exam
-    for component, findings in html_data['Exam'].items():
-        flat_html_data[f"Exam: {component}"] = findings
-    
-    # Process Assessment and Plan
-    for i, item in enumerate(html_data['Assessment_Plan']):
-        flat_html_data[f"A&P: {i+1}"] = item
-        
-    # Process Labs
-    for lab_name, lab_value in html_data['Labs'].items():
-        flat_html_data[f"Labs: {lab_name}"] = lab_value
+    # Process all sections from the HTML data
+    for section_name, section_content in html_data.items():
+        if isinstance(section_content, dict):
+            # If the section is a dictionary (like ROS or Exam)
+            for key, value in section_content.items():
+                flat_html_data[f"{section_name}: {key}"] = str(value)
+        elif isinstance(section_content, list):
+            # If the section is a list
+            for i, item in enumerate(section_content):
+                flat_html_data[f"{section_name}: {i+1}"] = str(item)
+        else:
+            # If the section is a string
+            flat_html_data[f"{section_name}"] = str(section_content)
     
     # Iterate through feedback data and compare with HTML data
     for _, row in feedback_df.iterrows():
-        category = row.get('Category', 'Unknown')
-        field = row.get('Field', 'Unknown')
-        expected_value = row.get('Expected Value', '')
+        # Check if the expected columns exist
+        section = row.get('Section', row.get('Category', 'Unknown'))
+        field = row.get('Field', '')
+        expected_value = row.get('Final PN (manually Created)', row.get('Expected Value', ''))
+        generated_value = row.get('Generated PN - 23-Apr', '')
         
-        # Construct the key to look up in flat_html_data
-        key = f"{category}: {field}"
+        # Construct keys to look up in flat_html_data - try different possible formats
+        keys_to_try = [
+            f"{section}",
+            f"{section}: {field}",
+            section
+        ]
         
-        # Check if the key exists in HTML data
-        if key in flat_html_data:
-            actual_value = flat_html_data[key]
+        # Find if any key exists in flat_html_data
+        matching_key = None
+        for key in keys_to_try:
+            if key in flat_html_data:
+                matching_key = key
+                break
+        
+        if matching_key:
+            actual_value = flat_html_data[matching_key]
             # Compare values
             if str(actual_value).lower() == str(expected_value).lower():
                 status = "✅ Match"
@@ -222,32 +194,41 @@ def compare_data_to_feedback(html_data, feedback_df):
                 status = "❌ Mismatch"
             
             results.append({
-                'Category': category,
+                'Section': section,
                 'Field': field,
                 'Expected Value': expected_value,
+                'Generated Value': generated_value,
                 'Actual Value': actual_value,
                 'Status': status
             })
             
             # Remove the key from flat_html_data after processing
-            del flat_html_data[key]
+            del flat_html_data[matching_key]
         else:
             # Item is missing in HTML data
             results.append({
-                'Category': category,
+                'Section': section,
                 'Field': field,
                 'Expected Value': expected_value,
+                'Generated Value': generated_value,
                 'Actual Value': "",
                 'Status': "➖ Missing"
             })
     
     # Add remaining HTML data items as "Extra"
     for key, value in flat_html_data.items():
-        category, field = key.split(': ', 1)
+        if ":" in key:
+            section, field = key.split(':', 1)
+            field = field.strip()
+        else:
+            section = key
+            field = ""
+            
         results.append({
-            'Category': category,
+            'Section': section,
             'Field': field,
             'Expected Value': "",
+            'Generated Value': "",
             'Actual Value': value,
             'Status': "➕ Extra"
         })

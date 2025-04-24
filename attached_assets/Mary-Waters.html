@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Physician’s Progress Note</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            content: ["./*.html"],
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            blue: {
+                                light: "#00ccdd"
+                            }
+                        }
+                    }
+                }
+            },
+            darkMode: "class"
+        };
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.1/tailwind.min.css" />
+    <style type="text/css">
+        @tailwind base;
+        @tailwind components;
+        @tailwind utilities;
+
+        body {
+            font-family: Inter;
+            font-size: 11pt;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .title {
+            font-family: Montserrat;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .section {
+            padding: 10px 0px;
+        }
+
+        .section-title {
+            font-family: Montserrat;
+            padding: 5px 0px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .assessment-and-plan {
+            font-family: monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+
+<body
+    class="dark flex flex-row justify-center bg-gray-50 border-gray-200 border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800 text-gray-300">
+    <div class="p-5 w-[800px] flex flex-col">
+        <div class="title text-center">Physician's Progress Note</div>
+
+        <div>
+            <span class="label">Patient Seen & Examined:</span> <input type="checkbox" checked> Yes <input
+                type="checkbox">
+            No
+            <span class="label">Relevant History Taken:</span> <input type="checkbox" checked> Yes <input
+                type="checkbox">
+            No
+        </div>
+
+        <div class="section">
+    <div class="section-title">HPI</div>
+    <div>Patient is an 81-year-old female with PMHx of left intertrochanteric fracture status post IMN, hypertension, Alzheimer's dementia with agitation, and urinary incontinence. Please refer to admission note. Briefly, patient is an 81 year old female with severe late onset Alzheimer's dementia w/agitation, HTN, urinary incontinence who was brought from home on 3/18/25 after a witnessed mechanical fall when patient hit left side of her body on the ground leading to left hip pain, found to have left intertrochanteric fracture. No LOC, dizziness, seizure, chest pain, vision changes prior to the event per family. She underwent IMN nail with orthopedics (Dr. Callander) on 3/19/25. Evaluated by PT/OT who recommended SNF. Her postop course was notable for agitation and delirium, requiring sitter and IM zyprexa at times. She was started on risperidone which was effective in controlling her agitation. At time of discharge, she has not required sitter for over 48 hours. She will be discharged to SNF for further therapy event per family.
+
+SUMMARY OF ACTIVE PROBLEMS:
+- Left intertrochanteric fracture after mech fall
+- s/p IM nail with Dr Callander 3/19/25
+- WBAT
+- PT rec SNF
+- ASA 81 mg BID x 4 weeks
+- PRN Tylenol, tramadol 25 mg for pain
+- Dementia c/b agitation
+- Postop delirium
+- MOCA 4/5/2023 9/30. Has had some agitation postoperatively, likely related to hospital delirium. Improved w/ initiation of risperidone.
+- cont duloxetine 20 mg
+- risperidone 0.5 mg q8h scheduled, plus 0.5 mg PRN
+- E coli UTI (pan-sensitive), with leukocytosis on admit
+- not clearly symptomatic on admission but given fall & hardware implantation, treated with 5 days of ceftriaxone
+- Hypertension- stable
+- Continue amlodipine/valsartan 10/160 mg
+- Elevated LFTs w AST129/ ALT 158, normal bili
+- spontaneously resolved
+- Disposition: SNF
+- may ultimately require long term care given severity of her dementia, will need to discuss w/ her family
+- PROCEDURES: Left hip IM nailing 3/19/25 by Dr Callander
+- ACTIVITY: as tolerated
+- DIET: Diet Regular
+- CONDITION: stable</div>
+</div>
+<div class="section">
+    <div class="section-title">PMH</div>
+    <div>Left intertrochanteric fracture status post IMN; Hypertension; Alzheimer's dementia with agitation; Urinary incontinence; B12 deficiency; Vitamin D deficiency; Constipation; Deconditioning/debility</div>
+</div>
+<div class="section">
+    <div class="section-title">PSH</div>
+    <div>Left hip IM nailing 3/19/25</div>
+</div>
+<div class="section">
+    <div class="section-title">SH</div>
+    <div>none</div>
+</div>
+<div class="section">
+    <div class="section-title">FH</div>
+    <div>son Alzheimer's dementia daughter</div>
+</div>
+<div class="section">
+    <div class="section-title">Medication prior to admission</div>
+    <div>amLODIPine Besylate-Valsartan
+Cymbalta
+Vitamin B12
+Vitamin D3
+Tylenol
+Enema
+Dulcolax Suppository
+Milk of Magnesia</div>
+</div>
+<div class="section">
+    <div class="section-title">Allergies</div>
+    <div>No known allergies.</div>
+</div>
+
+        <div class="section text-gray-500">
+            <pre class="pre text-wrap">
+DOS is 04/01/2025. Search window is ±1 month (03/02/2025 - 05/01/2025).
+            </pre>
+            <pre class="pre text-wrap">
+Document Preference Rule: Ref → ITR → Initial Evaluation → PASRR for PMH, PSH, SH, FH. For HPI, use Discharge Note (if within window), else H&amp;P, else Progress Note.
+            </pre>
+            <pre class="pre text-wrap">
+Discharge Note (03/27/25) is within window. HPI: Use 'Hospital Course' section from Discharge Note. PMH: Use Ref/ITR/Initial Eval/PASRR, else Hospital Course. PSH: Use Ref/ITR/Initial Eval/PASRR. SH: Use Ref/ITR/Initial Eval/PASRR. FH: Use Ref/ITR/Initial Eval/PASRR.
+            </pre>
+            <pre class="pre text-wrap">
+Medication prior to admission: No explicit section in Discharge Note or Initial Eval. Use active Pharmacy orders at DOS (from Orders tab). List only medication names.
+            </pre>
+            <pre class="pre text-wrap">
+Allergies: Provided as 'No Known Allergies'.
+            </pre>
+        </div>
+
+        <div class="section">
+  <div class="section-title">Review of Systems:</div>
+  <div>
+    <input type="checkbox"> No Pain
+    <input type="checkbox" checked> Pain
+    <input type="checkbox" checked> No Cough
+    <input type="checkbox"> Cough
+    <input type="checkbox" checked> No Appetite Loss
+    <input type="checkbox"> No Constipation
+    <input type="checkbox" checked> No Diarrhea
+    <input type="checkbox"> Diarrhea <br />
+    <input type="checkbox"> Headache
+    <input type="checkbox"> SOB
+    <input type="checkbox"> Nausea
+    <input type="checkbox"> Vomiting
+    <input type="checkbox"> Abdominal Pain
+    <input type="checkbox"> Sore Throat
+  </div>
+  <div>
+    Weight changes reviewed: <input type="checkbox" checked> Yes <input type="checkbox"> No <br>
+    Any new behavior issues reviewed: <input type="checkbox" checked> Yes <input type="checkbox"> No <br>
+    Nurse’s notes reviewed: <input type="checkbox" checked> Yes <input type="checkbox"> No <br>
+    SS notes reviewed: <input type="checkbox" checked> Yes <input type="checkbox"> No <br>
+    IDT reviewed: <input type="checkbox" checked> Yes <input type="checkbox"> No
+  </div>
+</div>
+
+        <div class="section text-gray-500">
+            <pre class="white-space-pre text-wrap">
+Step 1: List of Document Founds
+- Discharge Summary (03/27/25)
+- NP Initial Evaluation Visit (03/28/25)
+- PASRR Screening (03/18/25)
+- Orders (current)
+- Vitals (current)
+
+Step 2: Found Symptoms, Diagnosis, Monitoring values from the documents
+- Discharge Summary: Diagnoses include left intertrochanteric fracture, hypertension, Alzheimer's dementia with agitation, urinary incontinence, UTI. Hospital course: mechanical fall, left hip pain, agitation, delirium, no LOC, dizziness, seizure, chest pain, vision changes, or respiratory symptoms. No mention of cough, SOB, headache, nausea, vomiting, abdominal pain, sore throat, diarrhea. Constipation and bowel regimen mentioned in plan. Appetite is not mentioned as poor. 
+- NP Initial Evaluation: ROS unable to obtain from patient, but per nursing, patient stable, no respiratory symptoms, afebrile, appetite is fair. Abdomen: BS normal, no tenderness, no masses. No SPT or distention. No edema. No mention of cough, SOB, headache, nausea, vomiting, abdominal pain, sore throat, diarrhea. Constipation: on bowel regimen. Appetite: fair. 
+- Orders: Monitor for pain every shift, Tylenol PRN for pain, Cymbalta for pain, bowel regimen for constipation, enema and suppository PRN for constipation, Milk of Magnesia PRN for constipation, hold if diarrhea. COVID-19 symptom screening every shift. 
+- Vitals: Pain 0/10 (but monitoring for pain is ordered). 
+
+Step 3: Explanation of each checkbox value
+- No Pain - Not checked, as pain monitoring is ordered (Orders take precedence).
+- Pain - Checked, as pain monitoring is ordered (Orders take precedence).
+- No Cough - Checked, as no cough is mentioned in any document and no cough medication is ordered.
+- Cough - Not checked, as no cough is mentioned in any document.
+- No Appetite Loss - Checked, as appetite is described as fair in NP note and no loss of appetite is mentioned.
+- No Constipation - Not checked, as constipation is present and bowel regimen is ordered.
+- No Diarrhea - Checked, as no diarrhea is mentioned and Milk of Magnesia is to be held if diarrhea occurs.
+- Diarrhea - Not checked, as no diarrhea is mentioned.
+- Headache - Not checked, as not mentioned in any document.
+- SOB - Not checked, as no SOB is mentioned and no medication for SOB is ordered.
+- Nausea - Not checked, as not mentioned in any document.
+- Vomiting - Not checked, as not mentioned in any document.
+- Abdominal Pain - Not checked, as not mentioned in any document.
+- Sore Throat - Not checked, as not mentioned in any document.
+- Weight changes reviewed: Yes (NP note and Orders indicate weight monitoring and risk for weight loss).
+- Any new behavior issues reviewed: Yes (NP note and Discharge Summary discuss agitation, dementia, and behavior issues).
+- Nurse’s notes reviewed: Yes (NP note states review of nursing information).
+- SS notes reviewed: Yes (NP note and interdisciplinary team management mentioned).
+- IDT reviewed: Yes (NP note and interdisciplinary team management mentioned).
+            </pre>
+        </div>
+
+        <div class="section">
+    <div class="section-title">Exam</div>
+    <div>
+        <span class="label">Vitals:</span> B/P: 130/69 mmHg | Pulse: 95 bpm | Temp: 97 °F | RR: 18 breaths/min<br> O2: 96% | Weight: 143 Lbs | BS: 
+    </div>
+    <div>
+        HEENT: <input type="checkbox" checked> PERLA | <input type="checkbox"> Other <br>
+        Chest: <input type="checkbox" checked> CTAB | <input type="checkbox"> Wheezing | <input type="checkbox"> Rhonchi | <input type="checkbox"> Other <br>
+        CVS: <input type="checkbox" checked> S1 | <input type="checkbox" checked> S2 | <input type="checkbox" checked> Regular | <input type="checkbox"> Irregular | <input type="checkbox" checked> No Murmurs | <input type="checkbox"> Other <br>
+        Abdomen: <input type="checkbox" checked> Soft | <input type="checkbox" checked> Non-tender | <input type="checkbox"> Other <br>
+        Edema: <input type="checkbox"> Yes | <input type="checkbox" checked> No <br>
+        Neuro: Any Changes <input type="checkbox"> Yes | <input type="checkbox" checked> No <br>
+        Skin Issues: left inner thigh skin discoloration, left upper calf skin discoloration, right antecubital discoloration, dry scab on left inner lateral foot<br>
+        Other: 
+    </div>
+</div>
+
+        <div class="section text-gray-500">
+            <pre class="pre text-wrap">
+Step 1: List of documents to refer from.
+- Vitals Chart
+- Orders
+- Discharge Summary
+- NP Initial Evaluation Visit
+- PASRR Screening
+
+Step 2: Vitals Document Content - And show the vitals extracted.
+- Vitals Chart:
+  BP | 130/69 mmHg
+  Pulse | 95 bpm
+  Resp | 18 breaths/min
+  Temp | 97 °F
+  O2 | 96 %
+  Weight | 143 Lbs
+  BS |  
+  Pain | 0
+
+Step 3: Show extracted values for HEENT
+- Orders: No HEENT complaints.
+- Discharge Summary: HEENT: No scleral icterus, oropharynx sl dry, conjunctiva clear
+- NP Initial: HEENT: Normocephalic, Atraumatic, PERRLA, EOMI, conjunctiva pink, sclera clear; neck supple, no masses
+- No abnormal findings, so keep default: PERLA checked, Other unchecked.
+
+Step 4: Show extracted values for Chest - That might come from Physical exam, e.g. RESP: crackles at bases,...
+- Orders: No mention of chest/lung symptoms.
+- Discharge Summary: Respiratory: breathing is unlabored, clear to auscultation bilaterally ant; no wheezing
+- NP Initial: Chest: CTA, breathing comfortably in room air
+- No abnormal lung sounds, so keep default: CTAB checked, others unchecked.
+
+Step 5: Special Handling of Chest
+- No mention of wheezing, rhonchi, or crackles in any document.
+- No medications for wheezing.
+
+Step 6: Show extracted values for CVS, Abdomen, Edema, Neuro, Skin Issues.
+- CVS: Discharge Summary: Cardiovascular: regular rate and rhythm, no murmurs
+- NP Initial: Heart: RRR, Warm and well perfused
+- Keep default: S1, S2, Regular, No murmurs checked; Irregular, Other unchecked.
+
+- Abdomen: Discharge Summary: Gastrointestinal: soft, non distended, non tender to palpation, normal bowel sounds
+- NP Initial: Abdomen: Soft, non-distended, no tenderness, no masses, BS normal
+- Keep default: Soft, Non-tender checked; Other unchecked.
+
+- Edema: Discharge Summary: Musculoskeletal: no lower extremity edema
+- NP Initial: Extremities: no edema
+- Keep default: Yes unchecked, No checked.
+
+- Neuro: Discharge Summary: Neurologic: no facial droop, moves all extremities
+- NP Initial: Neuro: Very limited exam due to patient’s mental status, poor historian due to dementia, Moves arms bilaterally.
+- No explicit mention of neuro changes, so keep default: Any changes Yes unchecked, No checked.
+
+- Skin Issues: Orders: Monitor left inner thigh skin discoloration daily. Monitor left upper calf skin discoloration daily. Monitor right antecubital discoloration daily. Monitor dry scab on left inner lateral foot daily.
+- NP Initial: Skin: see skin chart
+- There are explicit skin issues to monitor, so under Skin Issues, note: left inner thigh skin discoloration, left upper calf skin discoloration, right antecubital discoloration, dry scab on left inner lateral foot.
+
+            </pre>
+        </div>
+
+        <div class="section">
+    <div class="section-title">Labs</div>
+    <div>
+        HgA1C:  | TSH:  | H/H:  | BUN/Cr:  <br>
+        Cholesterol:  | Other: XR FLUORO OP HIP LT, XR HIP 2 TO 3 VIEWS LEFT W PELVIS, XR CHEST PORTABLE<br>
+        Findings: XR FLUORO OP HIP LT: Fluoroscopy was utilized for intraoperative localization. Please see operative report for further details. A radiologist was not present. <br>XR HIP 2 TO 3 VIEWS LEFT W PELVIS: Degenerative changes of the visualized lower lumbar spine and bilateral sacroiliac joints. Acute displaced intertrochanteric fracture of the left proximal femur resulting in decreased femoral neck-shaft angulation. Bilateral hip joints are maintained with mild degenerative changes.<br>XR CHEST PORTABLE: The cardiomediastinal silhouette is within normal limits. Low lung volumes without obvious consolidation.<br>
+        Conclusion: XR FLUORO OP HIP LT: None. XR HIP 2 TO 3 VIEWS LEFT W PELVIS: None. XR CHEST PORTABLE: No acute cardiopulmonary process.<br>
+    </div>
+    <div><input type="checkbox" checked>No New Labs</div>
+</div>
+
+        <div class="section text-gray-500">
+            <pre class="pre text-wrap">
+DOS is 04/01/2025. 1 month before is 03/01/2025, 1 month after is 05/01/2025. Allowable window: 02/19/2025 to 05/11/2025 (1 month ±10 days).
+            </pre>
+            <pre class="pre text-wrap">
+Lab values in Discharge Summary (03/27/25) are from a narrative note, not a dedicated lab report. Do not extract from here.
+            </pre>
+            <pre class="pre text-wrap">
+Lab tables in Discharge Summary are not from a standalone lab report, but embedded in the summary. Do not extract.
+            </pre>
+            <pre class="pre text-wrap">
+TSH and Cholesterol panel values are from 04/22/2024, which is outside the allowed window. Do not extract.
+            </pre>
+            <pre class="pre text-wrap">
+A1CP and A1C values are from 01/30/2023 and 09/23/2021, which are outside the allowed window. Do not extract.
+            </pre>
+            <pre class="pre text-wrap">
+No dedicated lab report is provided in the documents within the allowed window.
+            </pre>
+            <pre class="pre text-wrap">
+Radiology reports (XR FLUORO OP HIP LT, XR HIP 2 TO 3 VIEWS LEFT W PELVIS, XR CHEST PORTABLE) are from 03/19/2025, which is within the allowed window. These are dedicated radiology reports and should be included under 'Other'.
+            </pre>
+            <pre class="pre text-wrap">
+No new labs or radiology since last note (all are from prior to DOS).
+            </pre>
+        </div>
+
+
+        <div class="section">
+            <div class="section-title">Assessment & Plan</div>
+            <div class="py-2">
+                <div>Telephone & Medication Orders Reviewed: <input type="checkbox" checked> Yes <input type="checkbox">
+                    No
+                </div>
+                <div>Labs Reviewed: <input type="checkbox" checked> Yes <input type="checkbox"> No</div>
+                <div>If pt is on psych meds, benefits, risks and dose reduction reviewed: <input type="checkbox"
+                        checked>
+                    Yes <input type="checkbox"> No</div>
+
+            </div>
+            <div class="assessment-and-plan text-wrap"># Hypertension
+- amLODIPine Besylate-Valsartan Oral Tablet 10-160 MG by mouth in the morning for HTN, hold for SBP&lt;110
+
+# Depression, pain
+- Cymbalta Oral Capsule Delayed Release Particles 20 MG by mouth in the morning
+
+# B12 deficiency
+- Vitamin B12 Oral Tablet Extended Release 1000 MCG by mouth in the morning for supplement
+
+# Vitamin D deficiency
+- Vitamin D3 Oral Tablet 25 MCG (1000 UT) by mouth in the morning for supplement
+
+# FEN
+- Regular diet, regular texture, regular consistency
+- Cont. supplements
+
+# Constipation risk
+- Continue bowel regimen
+
+# Deconditioning / Debility
+
+# Pain Management
+- Tylenol Tablet (Acetaminophen) 650 mg by mouth every 4 hours as needed for general discomfort, not to exceed 3 grams per 24 hours
+
+# Constipation
+- Enema Enema (Sodium Phosphates) as needed
+- Dulcolax Suppository 10 MG (Bisacodyl) as needed
+- Milk of Magnesia Suspension 400 MG/5ML (Magnesium Hydroxide) as needed
+
+# Wound Management
+- Left inner thigh skin discoloration
+- Left upper calf skin discoloration
+- Right antecubital discoloration
+- Dry scab on left inner lateral foot
+- Cont. wound care.</div>
+        </div>
+
+        <div class="section text-gray-500">
+            <pre class="pre text-wrap">
+Step 1: Documents found: Orders, Discharge Summary, NP Initial Evaluation Visit, PASRR Screening
+            </pre>
+            <pre class="pre text-wrap">
+Step 2: Active medications from Orders with Start Date:
+- Cymbalta Oral Capsule Delayed Release Particles 20 MG (Duloxetine HCl), 2025-03-29
+- Vitamin B12 Oral Tablet Extended Release 1000 MCG (Cyanocobalamin), 2025-03-29
+- Vitamin D3 Oral Tablet 25 MCG (1000 UT) (Cholecalciferol), 2025-03-29
+- amLODIPine Besylate-Valsartan Oral Tablet 10-160 MG (Amlodipine Besylate-Valsartan), 2025-03-29
+- Tylenol Tablet (Acetaminophen), 2025-03-28
+- Enema Enema (Sodium Phosphates), 2025-03-28
+- Dulcolax Suppository 10 MG (Bisacodyl), 2025-03-28
+- Milk of Magnesia Suspension 400 MG/5ML (Magnesium Hydroxide), 2025-03-28
+- Regular diet, Regular texture, Regular consistency, 2025-03-28
+            </pre>
+            <pre class="pre text-wrap">
+Step 3: Medications from Progress Note/Discharge Summary:
+# Hypertension
+- amLODIPine Besylate-Valsartan Oral Tablet 10-160 MG
+# Depression, pain
+- Cymbalta Oral Capsule Delayed Release Particles 20 MG
+# B12 deficiency
+- Vitamin B12 Oral Tablet Extended Release 1000 MCG
+# Vitamin D deficiency
+- Vitamin D3 Oral Tablet 25 MCG (1000 UT)
+# General discomfort
+- Tylenol Tablet (Acetaminophen)
+# Constipation
+- Enema Enema (Sodium Phosphates)
+- Dulcolax Suppository 10 MG (Bisacodyl)
+- Milk of Magnesia Suspension 400 MG/5ML (Magnesium Hydroxide)
+# FEN
+- Regular diet
+# Deconditioning/Debility
+- PT/OT/ST mentioned as needed in Discharge Summary, but no active dated therapy orders in Orders table.
+            </pre>
+            <pre class="pre text-wrap">
+Step 4: FEN analysis: Only oral supplements (B12, D3) and regular diet. Per rules, summarize as "Cont. supplements" under FEN. Regular diet to be listed as is.
+            </pre>
+            <pre class="pre text-wrap">
+Step 5: Deconditioning / Debility: No PT/OT/ST orders with both start and end dates in Orders, so do not include in final note. Mentioned in Discharge Summary and NP note, so keep heading but no therapy lines.
+            </pre>
+            <pre class="pre text-wrap">
+Step 6: Final List as per the rule:
+# Hypertension
+- amLODIPine Besylate-Valsartan Oral Tablet 10-160 MG by mouth in the morning for HTN, hold for SBP<110
+# Depression, pain
+- Cymbalta Oral Capsule Delayed Release Particles 20 MG by mouth in the morning
+# B12 deficiency
+- Vitamin B12 Oral Tablet Extended Release 1000 MCG by mouth in the morning for supplement
+# Vitamin D deficiency
+- Vitamin D3 Oral Tablet 25 MCG (1000 UT) by mouth in the morning for supplement
+# FEN
+- Regular diet, regular texture, regular consistency
+- Cont. supplements
+# Constipation risk
+- Continue bowel regimen
+# Deconditioning / Debility
+- No active therapy orders with dates; diagnosis present per Discharge Summary and NP note.
+# Pain Management
+- Tylenol Tablet (Acetaminophen) 650 mg by mouth every 4 hours as needed for general discomfort, not to exceed 3 grams per 24 hours
+# Constipation
+- Enema Enema (Sodium Phosphates) as needed
+- Dulcolax Suppository 10 MG (Bisacodyl) as needed
+- Milk of Magnesia Suspension 400 MG/5ML (Magnesium Hydroxide) as needed
+# Wound Management
+- Monitor left inner thigh skin discoloration daily
+- Monitor left upper calf skin discoloration daily
+- Monitor right antecubital discoloration daily
+- Monitor dry scab on left inner lateral foot daily
+- Cont. wound care.
+            </pre>
+            <pre class="pre text-wrap">
+Step 7: Names of medicines/therapy not part of final list with reasons:
+- Pneumovaccine, Annual Influenza Vaccine: No start date, not included.
+- PT/OT/ST: No start and end dates in Orders, not included as therapy lines.
+- Psychological evaluation, dental exam, podiatry care, audiology, eye consult: Not medications or therapies with start/end dates, not included.
+- Tylenol, Enema, Dulcolax, Milk of Magnesia: Included under Constipation and Pain Management as per rules.
+- Supplements (B12, D3): Summarized under FEN as "Cont. supplements" per rules.
+1. If there are any medication under "Constipation Risk" please give reason for it: Only "Continue bowel regimen" is included, no medications listed under this heading per rules.
+2. If "# Pain Management" section is in final response, then why it is added: Tylenol is active in Orders and mentioned for pain in A&P/Discharge Summary.
+3. Explanation about "Wound management": Active skin monitoring orders for multiple sites, so Wound Management section is included with sites and "Cont. wound care."
+4. Explanation about "Debility": Diagnosis present in Discharge Summary and NP note, but no active therapy orders with dates, so heading included without therapy lines.
+5. Explanation about "FEN": Only oral supplements and regular diet, so summarized as "Cont. supplements" and regular diet per rules.
+            </pre>
+        </div>
+
+        <div class="section">
+  <div>
+      <span class="label">Code Status:</span> 
+      <input type="checkbox" checked> POLST REVIEWED & SIGNED 
+      <input type="checkbox"> REFERRED FOR POLST COMPLETION
+  </div>
+  <div>
+      <span class="label">Pt. is high risk for:</span>
+      <input type="checkbox" checked> Falls
+      <input type="checkbox" checked> Wt. Changes
+      <input type="checkbox" checked> Behavior issues
+      <input type="checkbox" checked> ADL decline
+      <input type="checkbox" checked> DVT
+      <input type="checkbox" checked> Skin breakdown
+      <input type="checkbox" checked> Aspiration
+  </div>
+  <div>
+      <span class="label">Patient:</span>
+      <input type="checkbox"> Has the capacity to understand and make medical decisions
+      <input type="checkbox"> Needs assistance
+      <input type="checkbox" checked> Does not have the capacity
+  </div>
+  <div>
+      <input type="checkbox" checked> Discussed with Patient/Family/Nurse:
+      <input type="checkbox" checked> Goals of care
+      <input type="checkbox"> Discharge Planning
+      <input type="checkbox"> Change in tx
+      <input type="checkbox"> POLST
+  </div>
+  <div>
+      <input type="checkbox" checked> 50% of exam spent in counseling and/or coordination of care 
+      (Total time spent: 30 minutes)
+  </div>
+</div>
+
+        <div class="section text-gray-500">
+            <pre class="pre text-wrap">
+Step 1: Reviewing available documents for Progress Note or History and Physical (H&P).
+            </pre>
+            <pre class="pre text-wrap">
+Found: 'NP initial evaluation visit' dated 03/28/2025. This is a History and Physical (H&P) equivalent document. Proceeding to extract Code Status section from this document.
+            </pre>
+            <pre class="pre text-wrap">
+Extracted paragraph: 'Code Status: POLST Reviewed, Signed and in place in chart... Patient is at high risk for: Falls/Weight Changes/Behavior Issues/ADL Decline/DVT/Skin Breakdown/Aspiration Patient: Lacks capacity to understand choices and make her own healthcare decisions at this time and date. 50% of exam spent in counseling and/or coordination of care–total time spent– 30 minutes'
+            </pre>
+            <pre class="pre text-wrap">
+POLST REVIEWED & SIGNED: checked (explicitly stated 'POLST Reviewed, Signed and in place in chart')
+            </pre>
+            <pre class="pre text-wrap">
+REFERRED FOR POLST COMPLETION: unchecked (not mentioned)
+            </pre>
+            <pre class="pre text-wrap">
+Falls: checked (listed in 'high risk for')
+            </pre>
+            <pre class="pre text-wrap">
+Wt. Changes: checked (listed in 'high risk for')
+            </pre>
+            <pre class="pre text-wrap">
+Behavior issues: checked (listed in 'high risk for')
+            </pre>
+            <pre class="pre text-wrap">
+ADL decline: checked (listed in 'high risk for')
+            </pre>
+            <pre class="pre text-wrap">
+DVT: checked (listed in 'high risk for')
+            </pre>
+            <pre class="pre text-wrap">
+Skin breakdown: checked (listed in 'high risk for')
+            </pre>
+            <pre class="pre text-wrap">
+Aspiration: checked (listed in 'high risk for')
+            </pre>
+            <pre class="pre text-wrap">
+Has the capacity to understand and make medical decisions: unchecked (explicitly states 'Lacks capacity')
+            </pre>
+            <pre class="pre text-wrap">
+Needs assistance: unchecked (not mentioned)
+            </pre>
+            <pre class="pre text-wrap">
+Does not have the capacity: checked (explicitly states 'Lacks capacity to understand choices and make her own healthcare decisions at this time and date')
+            </pre>
+            <pre class="pre text-wrap">
+Discussed with Patient/Family/Nurse: checked (not explicitly stated, but per instructions, default to checked)
+            </pre>
+            <pre class="pre text-wrap">
+Goals of care: checked (not explicitly stated, but per instructions, default to checked)
+            </pre>
+            <pre class="pre text-wrap">
+Discharge Planning: unchecked (not mentioned)
+            </pre>
+            <pre class="pre text-wrap">
+Change in tx: unchecked (not mentioned)
+            </pre>
+            <pre class="pre text-wrap">
+POLST: unchecked (not mentioned)
+            </pre>
+            <pre class="pre text-wrap">
+50% of exam spent in counseling and/or coordination of care: checked (explicitly stated '50% of exam spent in counseling and/or coordination of care–total time spent– 30 minutes')
+            </pre>
+        </div>
+
+        <div class="footer flex flex-col">
+            <div class="flex flex-row py-2">
+                <div class="flex-1"><span class="label">Physician Signature:</span></div>
+                <div class="flex-1"><span class="label">Date:</span> 04/01/2025</div>
+            </div>
+            <div class="flex flex-row py-2">
+                <div class="flex-1"><span class="label">Patient Name:</span> Mary Waters</div>
+                <div class="flex-1"><span class="label">Attending Physician:</span>
+                    Anderson Boddie, MD</div>
+            </div>
+        </div>
+
+        <div class="section text-gray-500">
+        </div>
+    </div>
+</body>
+
+</html>

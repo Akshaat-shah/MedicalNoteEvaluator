@@ -27,10 +27,14 @@ if 'html_content' not in st.session_state:
     st.session_state.html_content = None
 if 'feedback_data' not in st.session_state:
     st.session_state.feedback_data = None
+if 'excel_sheets' not in st.session_state:
+    st.session_state.excel_sheets = []
+if 'selected_sheet' not in st.session_state:
+    st.session_state.selected_sheet = None
 if 'extracted_html_data' not in st.session_state:
     st.session_state.extracted_html_data = None
-if 'accuracy_score' not in st.session_state:
-    st.session_state.accuracy_score = None
+if 'accuracy_scores' not in st.session_state:
+    st.session_state.accuracy_scores = None
 if 'explanation' not in st.session_state:
     st.session_state.explanation = None
 if 'html_filename' not in st.session_state:
@@ -49,16 +53,42 @@ with col1:
         soup = BeautifulSoup(st.session_state.html_content, 'html.parser')
         st.session_state.extracted_html_data = extract_data_from_html(soup)
         # Reset results when a new file is uploaded
-        st.session_state.accuracy_score = None
+        st.session_state.accuracy_scores = None
         st.session_state.explanation = None
     
 with col2:
     excel_file = st.file_uploader("Upload feedback data (Excel file)", type=['xlsx'])
     if excel_file and excel_file.name != st.session_state.excel_filename:
         st.session_state.excel_filename = excel_file.name
-        st.session_state.feedback_data = pd.read_excel(excel_file)
+        
+        # Read all sheets from the Excel file
+        excel = pd.ExcelFile(excel_file)
+        st.session_state.excel_sheets = excel.sheet_names
+        
+        # Default to the first sheet
+        if st.session_state.excel_sheets:
+            st.session_state.selected_sheet = st.session_state.excel_sheets[0]
+            st.session_state.feedback_data = pd.read_excel(excel, sheet_name=st.session_state.selected_sheet)
+        
         # Reset results when a new file is uploaded
-        st.session_state.accuracy_score = None
+        st.session_state.accuracy_scores = None
+        st.session_state.explanation = None
+
+# Sheet selector if multiple sheets exist
+if st.session_state.excel_sheets and len(st.session_state.excel_sheets) > 1:
+    selected_sheet = st.selectbox(
+        "Select Excel Sheet",
+        st.session_state.excel_sheets,
+        index=st.session_state.excel_sheets.index(st.session_state.selected_sheet) if st.session_state.selected_sheet else 0
+    )
+    
+    if selected_sheet != st.session_state.selected_sheet:
+        st.session_state.selected_sheet = selected_sheet
+        # Re-read the Excel data with the selected sheet
+        excel_file = pd.ExcelFile(excel_file)
+        st.session_state.feedback_data = pd.read_excel(excel_file, sheet_name=selected_sheet)
+        # Reset results when a new sheet is selected
+        st.session_state.accuracy_scores = None
         st.session_state.explanation = None
 
 # Display extracted HTML data if available
@@ -79,7 +109,7 @@ if st.session_state.extracted_html_data:
 # Display feedback data if available
 if st.session_state.feedback_data is not None:
     with st.expander("View Feedback Data", expanded=False):
-        st.subheader("Feedback Data")
+        st.subheader(f"Feedback Data (Sheet: {st.session_state.selected_sheet})")
         st.dataframe(st.session_state.feedback_data, height=300)
 
 # Evaluate accuracy if both files are uploaded
@@ -111,7 +141,7 @@ if st.session_state.html_content and st.session_state.feedback_data is not None:
                 
                 # Create a prompt for the LLM with structured JSON output format
                 template = """
-                You are a medical documentation quality auditor. You need to evaluate the accuracy of a generated physician note (in HTML) against expert feedback.
+                You are a medical documentation quality auditor. You need to evaluate the accuracy of a generated physician note (in HTML) against expert feedback in an Excel spreadsheet.
 
                 HTML NOTE CONTENT:
                 {html_data}
@@ -120,22 +150,38 @@ if st.session_state.html_content and st.session_state.feedback_data is not None:
                 {feedback_data}
 
                 Instructions:
-                1. Compare the HTML note with the feedback data
-                2. Identify what information is correct, incorrect, or missing
-                3. Calculate an accuracy percentage score based on how well the HTML note matches the expert feedback
-                4. Provide a detailed explanation of the strengths and weaknesses of the note
-                5. Suggest improvements
+                1. Identify the sections in the HTML note (like HPI, PMH, Exam, etc.)
+                2. For each section, compare the content with the corresponding section in the feedback data
+                3. Calculate an accuracy percentage score for each section
+                4. Calculate an overall accuracy percentage score for the entire note
+                5. Provide detailed explanations of what information was correct, incorrect, or missing in each section
+
+                Focus on the factual accuracy of the medical information, including:
+                - Whether correct conditions/diagnoses are documented
+                - Whether all important symptoms/findings are included
+                - Whether all required sections are properly populated
+                - Whether any information is incorrectly reported
 
                 Respond with a JSON object with the following structure:
                 {{
-                  "accuracy_score": number,  // The accuracy percentage (0-100)
-                  "explanation": string,     // Detailed explanation of the evaluation
+                  "overall_accuracy_score": number,  // The overall accuracy percentage (0-100)
+                  "section_scores": {{
+                    "section_name1": number,  // Section accuracy percentage
+                    "section_name2": number,
+                    // ... other sections
+                  }},
+                  "explanation": string,     // Detailed explanation of the overall evaluation
+                  "section_analyses": {{
+                    "section_name1": string,  // Analysis for this section
+                    "section_name2": string,
+                    // ... other sections
+                  }},
                   "strengths": [string],     // List of strengths in the note
                   "weaknesses": [string],    // List of weaknesses in the note
                   "improvement_suggestions": [string]  // Suggestions for improving accuracy
                 }}
                 
-                Ensure the accuracy_score is a number between 0 and 100 representing the percentage accuracy.
+                Ensure the accuracy scores are numbers between 0 and 100 representing percentage accuracy.
                 Be thorough in your analysis, focusing on the medical content's accuracy.
                 """
                 
@@ -161,18 +207,42 @@ if st.session_state.html_content and st.session_state.feedback_data is not None:
                 # Extract the JSON content
                 try:
                     result = json.loads(response.content)
-                    st.session_state.accuracy_score = result.get("accuracy_score")
+                    st.session_state.accuracy_scores = {
+                        "overall": result.get("overall_accuracy_score"),
+                        "sections": result.get("section_scores", {})
+                    }
                     st.session_state.explanation = result
                 except Exception as e:
                     st.error(f"Error parsing LLM response: {e}")
                     st.session_state.explanation = response.content
 
 # Display results if available
-if st.session_state.accuracy_score is not None and st.session_state.explanation:
+if st.session_state.accuracy_scores and st.session_state.explanation:
     st.header("Accuracy Evaluation Results")
     
-    # Display accuracy score
-    st.subheader(f"Accuracy Score: {st.session_state.accuracy_score}%")
+    # Display overall accuracy score
+    st.subheader(f"Overall Accuracy Score: {st.session_state.accuracy_scores['overall']}%")
+    
+    # Display section-by-section accuracy scores
+    if st.session_state.accuracy_scores.get("sections"):
+        st.subheader("Section-by-Section Accuracy")
+        
+        # Create a bar chart for section scores
+        section_scores = st.session_state.accuracy_scores["sections"]
+        sections_df = pd.DataFrame({
+            "Section": list(section_scores.keys()),
+            "Accuracy (%)": list(section_scores.values())
+        })
+        
+        st.bar_chart(sections_df.set_index("Section"))
+        
+        # Display section analysis
+        st.subheader("Section-by-Section Analysis")
+        section_analyses = st.session_state.explanation.get("section_analyses", {})
+        
+        for section, analysis in section_analyses.items():
+            with st.expander(f"{section} - {section_scores.get(section, 'N/A')}% Accurate"):
+                st.markdown(analysis)
     
     # Use columns for strengths and weaknesses
     col1, col2 = st.columns(2)
@@ -190,7 +260,7 @@ if st.session_state.accuracy_score is not None and st.session_state.explanation:
             st.markdown(f"× {weakness}")
     
     # Display detailed explanation
-    st.subheader("Detailed Analysis")
+    st.subheader("Overall Analysis")
     st.markdown(st.session_state.explanation.get("explanation", ""))
     
     # Display improvement suggestions
@@ -200,11 +270,23 @@ if st.session_state.accuracy_score is not None and st.session_state.explanation:
         st.markdown(f"→ {suggestion}")
     
     # Generate downloadable report
+    section_report = ""
+    if st.session_state.accuracy_scores.get("sections"):
+        section_report = "## Section-by-Section Scores\n"
+        for section, score in st.session_state.accuracy_scores["sections"].items():
+            section_report += f"- {section}: {score}%\n"
+        
+        section_report += "\n## Section-by-Section Analysis\n"
+        for section, analysis in section_analyses.items():
+            section_report += f"### {section}\n{analysis}\n\n"
+    
     report = f"""# Medical Note Accuracy Evaluation Report
 
-## Accuracy Score: {st.session_state.accuracy_score}%
+## Overall Accuracy Score: {st.session_state.accuracy_scores['overall']}%
 
-## Detailed Analysis
+{section_report}
+
+## Overall Analysis
 {st.session_state.explanation.get("explanation", "")}
 
 ## Strengths
@@ -235,10 +317,13 @@ if not html_file or not excel_file:
         
         1. **Upload HTML File**: This should be the physician-generated note in HTML format
         2. **Upload Excel File**: This should contain the expert feedback data for the note
+           - If your Excel file has multiple sheets, you can select which one to use
+           - The Excel should have columns for Section, Final PN (correct value), Generated PN (actual value), etc.
         3. **Click "Evaluate Note Accuracy"**: The app will use AI to analyze the content and provide:
-           - An accuracy percentage score
+           - An overall accuracy percentage score
+           - Section-by-section accuracy scores
+           - Detailed analysis of what was correct/incorrect in each section
            - Strengths and weaknesses of the note
-           - Detailed analysis of what was correct/incorrect
            - Improvement suggestions
         4. **Download Report**: Save the complete evaluation as a text file
         """)
