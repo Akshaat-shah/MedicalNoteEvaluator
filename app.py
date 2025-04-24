@@ -127,15 +127,13 @@ if st.session_state.html_content and st.session_state.feedback_data is not None:
                 5. Suggest improvements
 
                 Respond with a JSON object with the following structure:
-                ```json
-                {
+                {{
                   "accuracy_score": number,  // The accuracy percentage (0-100)
                   "explanation": string,     // Detailed explanation of the evaluation
                   "strengths": [string],     // List of strengths in the note
                   "weaknesses": [string],    // List of weaknesses in the note
                   "improvement_suggestions": [string]  // Suggestions for improving accuracy
-                }
-                ```
+                }}
                 
                 Ensure the accuracy_score is a number between 0 and 100 representing the percentage accuracy.
                 Be thorough in your analysis, focusing on the medical content's accuracy.
