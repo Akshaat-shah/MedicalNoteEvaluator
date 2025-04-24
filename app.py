@@ -3,7 +3,7 @@ import pandas as pd
 import io
 from bs4 import BeautifulSoup
 from langchain.prompts import ChatPromptTemplate
-from langchain.chat_models import ChatOpenAI
+from langchain_community.chat_models import ChatOpenAI
 from langchain.chains import LLMChain
 import os
 from utils import (
