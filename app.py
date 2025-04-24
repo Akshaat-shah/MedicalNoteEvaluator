@@ -3,7 +3,7 @@ import pandas as pd
 import io
 from bs4 import BeautifulSoup
 from langchain.prompts import ChatPromptTemplate
-from langchain_community.chat_models import ChatOpenAI
+from langchain_openai import ChatOpenAI
 import os
 import json
 from utils import extract_data_from_html
@@ -148,6 +148,27 @@ if st.session_state.html_content and st.session_state.feedback_data is not None:
 
                 FEEDBACK DATA:
                 {feedback_data}
+                
+                ## Instructions
+
+                1. **Identify the sections** in the HTML note (e.g., `HPI`, `PMH`, `Exam`, etc.).
+
+                2. **For each section**, analyze the associated feedback comments.
+
+                3. **Determine accuracy for each section** by interpreting the feedback:
+                    - If a comment indicates **missing** or **incorrect** information, deduct from the section’s accuracy.
+                    - If a comment confirms **correctness** or provides no critique, consider it **accurate**.
+
+                4. **Calculate an accuracy percentage score** for each section:
+                    - Use the ratio of correct points to total feedback points (correct + incorrect + missing).
+
+                5. **Compute an overall accuracy percentage score** by averaging the scores of all sections.
+
+                6. **Provide detailed explanations** for each section, including:
+                    - What information was marked as **correct**
+                    - What was identified as **incorrect**
+                    - What information was **missing**, according to the feedback
+
 
                 Instructions:
                 1. Focus ONLY on these 6 specific sections: Subjective, Review Of Systems, Vitals, Labs, Assessment & Plan, Code Status
@@ -160,6 +181,7 @@ if st.session_state.html_content and st.session_state.feedback_data is not None:
                    - If Status is "Incorrect": Maximum 50%
                 5. Calculate an overall accuracy score as the average of these 6 sections (only count sections that exist)
                 6. For each section, analyze what was correct and what needs improvement based on the comments
+
 
                 Respond with a JSON object with the following structure:
                 {{
@@ -307,12 +329,13 @@ if st.session_state.accuracy_scores and st.session_state.explanation:
 ## Improvement Suggestions
 {chr(10).join(['- ' + s for s in suggestions])}
 """
-    
+
+    base_filename = st.session_state.html_filename.split('.')[0] + '.txt'
     # Download button
     st.download_button(
         label="Download Evaluation Report",
         data=report,
-        file_name="medical_note_accuracy_evaluation.txt",
+        file_name=base_filename,
         mime="text/plain"
     )
     
